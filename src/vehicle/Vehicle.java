@@ -11,7 +11,7 @@ public abstract class Vehicle {
     public Vehicle(String model, int maxPassengers, int maxSpeed) {
         this.model = model;
         this.distanceTraveled = 0;
-        this.maxPassengers = maxPassengers;
+        this.maxPassengers = maxPassengers;//jjjjj
         this.maxSpeed = maxSpeed;
     }
 
