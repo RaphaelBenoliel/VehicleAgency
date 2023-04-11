@@ -1,7 +1,14 @@
 package vehicle;
 
 public interface Motorized {
-    public void averageFuelConsumption(float fuelConsumption);
-    public void averageEngineLife(int engineLife);
+    /**
+     * This interface is used to define the methods that are used in the Motorized class
+     * @param fuelConsumption
+     * @param engineLife
+     */
+    public void setAverageFuelConsumption(float fuelConsumption);
+    public float getAverageFuelConsumption();
 
+    public void setAverageEngineLife(int engineLife);
+    public int getAverageEngineLife();
 }
