@@ -1,6 +1,7 @@
 package vehicle;
 
 public class Jeep extends LandTransportation implements Motorized,Commercial {
+
     private float averageFuelConsumption;
     private int averageEngineLife;
     private licenseType licenseType;
@@ -44,5 +45,18 @@ public class Jeep extends LandTransportation implements Motorized,Commercial {
     public String toString(){
         return getName() + super.toString() + " It has a " + getLicenseType() + " license." + " Engine: " +
                 getAverageFuelConsumption() + ", lifetime of " + getAverageEngineLife() + " years.";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        Jeep jeep = (Jeep) o;
+
+        if (Float.compare(jeep.averageFuelConsumption, averageFuelConsumption) != 0) return false;
+        if (averageEngineLife != jeep.averageEngineLife) return false;
+        return licenseType == jeep.licenseType;
     }
 }
