@@ -30,5 +30,9 @@ public class Frigate extends AirTransportation implements Motorized {
     public int getAverageEngineLife() {
         return averageEngineLife;
     }
+    public String toString(){
+       return getName() + super.toString() + " Engine: " + getAverageFuelConsumption() + ", lifetime of " +
+               getAverageEngineLife() + " years.";
+    }
 }
 
