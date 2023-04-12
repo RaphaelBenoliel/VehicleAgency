@@ -29,9 +29,8 @@ public abstract class LandTransportation extends Vehicle {
 
     @Override
     public String toString() {
-        return super.toString() + "It has " + wheels + " wheels and is used on " + roadType + " roads.";
+        return super.toString() + " It has " + wheels + " wheels, can move on " + roadType + ".";
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
