@@ -10,23 +10,10 @@ public abstract class LandTransportation extends Vehicle {
         this.wheels = wheels;
         this.roadType = roadType;
     }
-
-    public int getWheels() {
-        return wheels;
-    }
-
-    public String getRoadType() {
-        return roadType;
-    }
-
-    public void setWheels(int wheels) {
-        this.wheels = wheels;
-    }
-
-    public void setRoadType(String roadType) {
-        this.roadType = roadType;
-    }
-
+    public int getWheels() { return wheels; }
+    public String getRoadType() { return roadType; }
+    public void setWheels(int wheels) { this.wheels = wheels; }
+    public void setRoadType(String roadType) { this.roadType = roadType; }
     @Override
     public String toString() {
         return super.toString() + " It has " + wheels + " wheels, can move on " + roadType + ".";

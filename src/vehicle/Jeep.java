@@ -19,34 +19,19 @@ public class Jeep extends LandTransportation implements Motorized,Commercial {
     }
 
     @Override
-    public vehicle.licenseType getLicenseType() {
-        return licenseType;
-    }
-
+    public vehicle.licenseType getLicenseType() { return licenseType; }
     @Override
-    public void setAverageFuelConsumption(float fuelConsumption) {
-        averageFuelConsumption = fuelConsumption;
-    }
-
+    public void setAverageFuelConsumption(float fuelConsumption) { averageFuelConsumption = fuelConsumption; }
     @Override
-    public float getAverageFuelConsumption() {
-        return averageFuelConsumption;
-    }
-
+    public float getAverageFuelConsumption() { return averageFuelConsumption; }
     @Override
-    public void setAverageEngineLife(int engineLife) {
-        averageEngineLife = engineLife;
-    }
-
+    public void setAverageEngineLife(int engineLife) { averageEngineLife = engineLife; }
     @Override
-    public int getAverageEngineLife() {
-        return averageEngineLife;
-    }
+    public int getAverageEngineLife() { return averageEngineLife; }
     public String toString(){
         return getName() + super.toString() + " It has a " + getLicenseType() + " license." + " Engine: " +
                 getAverageFuelConsumption() + ", lifetime of " + getAverageEngineLife() + " years.";
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -54,7 +39,6 @@ public class Jeep extends LandTransportation implements Motorized,Commercial {
         if (!super.equals(o)) return false;
 
         Jeep jeep = (Jeep) o;
-
         if (Float.compare(jeep.averageFuelConsumption, averageFuelConsumption) != 0) return false;
         if (averageEngineLife != jeep.averageEngineLife) return false;
         return licenseType == jeep.licenseType;
