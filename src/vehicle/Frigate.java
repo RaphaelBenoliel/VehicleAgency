@@ -1,13 +1,14 @@
 package vehicle;
 
-public class Frigate extends AirTransportation implements Motorized {
+public class Frigate extends SeaTransportation implements Motorized {
     private float averageFuelConsumption;
     private int averageEngineLife;
     public String getName(){
         return "Frigate";
     }
-    public Frigate(String model,int maxPassengers, int maxSpeed, String useInfo) {
-        super(model, maxPassengers, maxSpeed, useInfo);
+    public Frigate(String model, int maxPassengers, int maxSpeed, boolean withWindDirection,
+                   String countryFlag) {
+        super(model, maxPassengers, maxSpeed, withWindDirection, "Israel");
         setAverageEngineLife(4);
         setAverageFuelConsumption(500);
     }
@@ -31,7 +32,7 @@ public class Frigate extends AirTransportation implements Motorized {
         return averageEngineLife;
     }
     public String toString(){
-       return getName() + super.toString() + " Engine: " + getAverageFuelConsumption() + ", lifetime of " +
+       return getName() +": "+ super.toString() + " Engine: " + getAverageFuelConsumption() + ", lifetime of " +
                getAverageEngineLife() + " years.";
     }
 

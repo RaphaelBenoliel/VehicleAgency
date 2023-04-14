@@ -9,5 +9,4 @@ public interface noMotorized {
     public void setPowerRating(PowerRating rating);
     public String getPowerSource();
     public PowerRating getPowerRating();
-
 }

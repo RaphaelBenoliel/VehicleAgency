@@ -29,7 +29,7 @@ public class Jeep extends LandTransportation implements Motorized,Commercial {
     @Override
     public int getAverageEngineLife() { return averageEngineLife; }
     public String toString(){
-        return getName() + super.toString() + " It has a " + getLicenseType() + " license." + " Engine: " +
+        return getName() +": "+ super.toString() + " It has a " + getLicenseType() + " license." + " Engine: " +
                 getAverageFuelConsumption() + ", lifetime of " + getAverageEngineLife() + " years.";
     }
     @Override

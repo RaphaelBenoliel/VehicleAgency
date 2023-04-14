@@ -3,33 +3,23 @@ package vehicle;
 import java.util.Objects;
 
 public abstract class SeaTransportation extends Vehicle{
-
     protected boolean withWindDirection;
     protected String countryFlag;
-
     public SeaTransportation(String model, int maxPassengers, int maxSpeed, boolean withWindDirection,
                              String countryFlag){
         super(model, maxPassengers, maxSpeed);
         this.withWindDirection = withWindDirection;
         this.countryFlag = countryFlag;
     }
+    public boolean isWithWindDirection() { return withWindDirection; }
 
-    public boolean isWithWindDirection() {
-        return withWindDirection;
-    }
+    public String getCountryFlag() { return countryFlag; }
 
-    public String getCountryFlag() {
-        return countryFlag;
-    }
-
-    public void setWithWindDirection(boolean withWindDirection) {
-        this.withWindDirection = withWindDirection;
-    }
+    public void setWithWindDirection(boolean withWindDirection) { this.withWindDirection = withWindDirection; }
 
     public void setCountryFlag(String countryFlag) {
         this.countryFlag = countryFlag;
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -41,17 +31,10 @@ public abstract class SeaTransportation extends Vehicle{
         if (withWindDirection != that.withWindDirection) return false;
         return Objects.equals(countryFlag, that.countryFlag);
     }
-
-    @Override
-    public int hashCode() {
-        return 0;
-    }
-
     @Override
     public String toString() {
-        String result =  super.toString() + "Under " + countryFlag + " flag, ";
+        String result =  super.toString() + " Under " + countryFlag + " flag, ";
         result += withWindDirection ? "with" : "against";
         return result + " the wind.";
     }
-
 }
