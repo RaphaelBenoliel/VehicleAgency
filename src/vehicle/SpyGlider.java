@@ -4,12 +4,12 @@ import java.util.Objects;
 
 public class SpyGlider extends AirTransportation implements noMotorized{
     private String powerSource;
-    private PowerRating powerRating;
+    private EnergyScore energyScore;
     public SpyGlider(String PowerSource)
     {
         super("privileged", 1, 50, "Military");
         setPowerSource(PowerSource);
-        setPowerRating(PowerRating.C);
+        setEnergyScore(EnergyScore.C);
     }
 
     @Override
@@ -18,8 +18,8 @@ public class SpyGlider extends AirTransportation implements noMotorized{
     }
 
     @Override
-    public void setPowerRating(PowerRating rating) {
-        this.powerRating = rating;
+    public void setEnergyScore(EnergyScore score) {
+        this.energyScore = score;
     }
 
     @Override
@@ -28,17 +28,16 @@ public class SpyGlider extends AirTransportation implements noMotorized{
     }
 
     @Override
-    public PowerRating getPowerRating() {
-        return powerRating;
+    public EnergyScore getEnergyScore() {
+        return energyScore;
     }
     public String getName(){
         return "SpyGlider";
     }
     public String toString(){
-        return getName() +": "+ super.toString() + " It is powered by " + getPowerSource() + " and has a power rating of "
-                + getPowerRating() + ".";
+        return getName() +": "+ super.toString() + " It's source power is " + getPowerSource() +
+                " and has a energy score of " + getEnergyScore() + ".";
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -49,7 +48,7 @@ public class SpyGlider extends AirTransportation implements noMotorized{
 
         if (!Objects.equals(powerSource, spyGlider.powerSource))
             return false;
-        return powerRating == spyGlider.powerRating;
+        return energyScore == spyGlider.energyScore;
     }
 
 }

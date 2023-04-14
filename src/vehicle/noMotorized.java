@@ -1,12 +1,12 @@
 package vehicle;
 
-enum PowerRating{
+enum EnergyScore {
     A, B, C
 }
 
 public interface noMotorized {
     public void setPowerSource(String powerSource);
-    public void setPowerRating(PowerRating rating);
+    public void setEnergyScore(EnergyScore score);
     public String getPowerSource();
-    public PowerRating getPowerRating();
+    public EnergyScore getEnergyScore();
 }
