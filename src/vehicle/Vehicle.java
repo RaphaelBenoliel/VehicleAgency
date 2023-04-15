@@ -7,7 +7,13 @@ public abstract class Vehicle {
     protected int distanceTraveled;
     protected int maxPassengers;
     protected int maxSpeed;
-
+    /**
+     * Constructs a new Vehicle with the given model, maximum number of passengers, and maximum speed.
+     *
+     * @param model the model of the vehicle
+     * @param maxPassengers the maximum number of passengers the vehicle can carry
+     * @param maxSpeed the maximum speed of the vehicle
+     */
     public Vehicle(String model, int maxPassengers, int maxSpeed) {
         this.model = model;
         this.distanceTraveled = 0;
