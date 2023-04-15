@@ -52,8 +52,8 @@ public abstract class Vehicle {
     }
 
     public String toString() {
-        return "Model: " + this.model + "Traveled: " + this.distanceTraveled + "KM, Max Speed of " + this.maxSpeed +
-                "Mph, can carry max of " + this.maxPassengers + "people.";
+        return "Model: " + this.model + ", Traveled: " + this.distanceTraveled + "KM, Max Speed of " + this.maxSpeed +
+                "Mph, can carry max of " + this.maxPassengers + " people.";
     }
     @Override
     public boolean equals(Object o) {

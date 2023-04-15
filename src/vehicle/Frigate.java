@@ -1,17 +1,16 @@
 package vehicle;
 
 public class Frigate extends SeaTransportation implements Motorized {
-    private float averageFuelConsumption;
+    private int averageFuelConsumption;
     private int averageEngineLife;
     public String getName(){ return "Frigate"; }
-    public Frigate(String model, int maxPassengers, int maxSpeed, boolean withWindDirection,
-                   String countryFlag) {
+    public Frigate(String model, int maxPassengers, int maxSpeed, boolean withWindDirection) {
         super(model, maxPassengers, maxSpeed, withWindDirection, "Israel");
         setAverageEngineLife(4);
         setAverageFuelConsumption(500);
     }
     @Override
-    public void setAverageFuelConsumption(float fuelConsumption) {
+    public void setAverageFuelConsumption(int fuelConsumption) {
         averageFuelConsumption = fuelConsumption;
     }
     @Override
@@ -29,7 +28,7 @@ public class Frigate extends SeaTransportation implements Motorized {
         return averageEngineLife;
     }
     public String toString(){
-       return getName() +": "+ super.toString() + " Engine: " + getAverageFuelConsumption() + ", lifetime of " +
+       return getName() +": "+ super.toString() + " Engine: " + getAverageFuelConsumption() + "L, lifetime of " +
                getAverageEngineLife() + " years.";
     }
 

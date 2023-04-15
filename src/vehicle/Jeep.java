@@ -2,15 +2,17 @@ package vehicle;
 
 public class Jeep extends LandTransportation implements Motorized,Commercial {
 
-    private float averageFuelConsumption;
+    private int averageFuelConsumption;
     private int averageEngineLife;
     private licenseType licenseType;
     public String getName(){
         return "Jeep";
     }
-    public Jeep(String model, int maxSpeed) {
+    public Jeep(String model, int maxSpeed, int fuelConsumption, int engineLife) {
         super(model, 5, maxSpeed, 4, "off-road");
         setLicenseType(vehicle.licenseType.MINI);
+        setAverageFuelConsumption(fuelConsumption);
+        setAverageEngineLife(engineLife);
     }
 
     @Override
@@ -21,7 +23,7 @@ public class Jeep extends LandTransportation implements Motorized,Commercial {
     @Override
     public vehicle.licenseType getLicenseType() { return licenseType; }
     @Override
-    public void setAverageFuelConsumption(float fuelConsumption) { averageFuelConsumption = fuelConsumption; }
+    public void setAverageFuelConsumption(int fuelConsumption) { averageFuelConsumption = fuelConsumption; }
     @Override
     public float getAverageFuelConsumption() { return averageFuelConsumption; }
     @Override
@@ -30,7 +32,7 @@ public class Jeep extends LandTransportation implements Motorized,Commercial {
     public int getAverageEngineLife() { return averageEngineLife; }
     public String toString(){
         return getName() +": "+ super.toString() + " It has a " + getLicenseType() + " license." + " Engine: " +
-                getAverageFuelConsumption() + ", lifetime of " + getAverageEngineLife() + " years.";
+                getAverageFuelConsumption() + "L, lifetime of " + getAverageEngineLife() + " years.";
     }
     @Override
     public boolean equals(Object o) {
