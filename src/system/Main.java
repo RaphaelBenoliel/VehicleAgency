@@ -141,17 +141,14 @@ public class Main {
             System.out.println("Invalid vehicle type. Please try again.");
         } else {
             for (int i = 0; i < agency.length; i++) {
-                if(agency[i].equals(vehicle)){
-
+                if (agency[i].equals(vehicle)) {
                     System.out.println("Vehicle found in the agency!");
                     agency = removeVehicle(agency, i);
                     System.out.println("Vehicle successfully purchased!");
                     break;
                 }
-                else {
-                    System.out.println("Vehicle not found in the agency!");
-                }
             }
+            System.out.println("Vehicle not found in the agency! Please try again.");
         }
         return agency;
     }
