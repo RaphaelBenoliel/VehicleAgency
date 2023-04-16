@@ -48,16 +48,7 @@ public class Main {
                 }
                 case 4 -> {
                     System.out.println("=================== Changing Vessels Flags ===================");
-                    System.out.println("Please enter the new flag:");
-                    String newFlag = scanner.next();
-                    if (Agency != null) {
-                        for (Vehicle vehicle : Agency) {
-                            if (vehicle instanceof SeaTransportation) {
-                                ((SeaTransportation) vehicle).setCountryFlag(newFlag);
-                            }
-                        }
-                        System.out.println("All vessels flags has been changed successfully.");
-                    }
+                    changeVesselsFlags(Agency);
                 }
                 case 5 -> {
                     System.out.println("Goodbye!");
@@ -68,6 +59,20 @@ public class Main {
             }
         }
     }//end of method main
+
+    private static void changeVesselsFlags(Vehicle[] agency) {
+        System.out.println("Please enter the new flag:");
+        Scanner scanner = new Scanner(System.in);
+        String newFlag = scanner.next();
+        if (agency != null) {
+            for (Vehicle vehicle : agency) {
+                if (vehicle instanceof SeaTransportation) {
+                    ((SeaTransportation) vehicle).setCountryFlag(newFlag);
+                }
+            }
+            System.out.println("All vessels flags has been changed successfully.");
+        }
+    }
 
     private static void testDrive(Vehicle[] agency) {
         System.out.println("Which vehicle would you like to test drive?");
