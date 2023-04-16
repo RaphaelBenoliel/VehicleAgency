@@ -24,6 +24,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
+            System.out.println("============== Welcome to the vehicle agency! ==============");
             System.out.println("Please choose an option:");
             System.out.println("1. Buy a vehicle");
             System.out.println("2. Test drive a vehicle");
@@ -34,12 +35,15 @@ public class Main {
             int option = scanner.nextInt();
             switch (option) {
                 case 1 -> {
-                    System.out.println("-----------------Buy A Vehicle Menu-----------------");
-                    assert Agency != null;
+                    System.out.println("=================== Buy A Vehicle Menu ===================");
+                    if(Agency.length == 0) {
+                        System.out.println("There are no vehicles in the agency.");
+                        break;
+                    }
                     Agency = buyVehicle(Agency);
                 }
-                case 2 -> System.out.println("TestVehicle");
-                case 3 -> System.out.println("Reset_ALL_KM");
+                case 2 -> System.out.println("=================== Test A Vehicle ===================");
+                case 3 -> System.out.println("Reset All Vehicle Kilometer");
                 case 4 -> System.out.println("ChangingFlag");
                 case 5 -> {
                     System.out.println("Goodbye!");
@@ -128,10 +132,7 @@ public class Main {
 
     private static Vehicle[] buyVehicle(Vehicle[] agency) {
         System.out.println("In order to buy a vehicle, you must fill in the vehicle details exactly as in the following list:");
-        if(agency.length == 0) {
-            System.out.println("There are no vehicles in the agency.");
-            return null;
-        }
+
         for (int i = 0; i < agency.length; i++) {
             System.out.println(i + 1 + ". " + agency[i]);
         }

@@ -13,7 +13,7 @@ public abstract class AirTransportation extends Vehicle{
 
     public void setUseInfo(String useInfo) { this.useInfo = useInfo; }
     public String toString(){
-        return super.toString() + "It is used for " + useInfo + ".";
+        return super.toString() + " It is used for " + useInfo + ".";
     }
     @Override
     public boolean equals(Object o) {
