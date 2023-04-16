@@ -60,7 +60,7 @@ public class Main {
         }
     }//end of method main
 
-    private static void changeVesselsFlags(Vehicle[] agency) {
+    public static void changeVesselsFlags(Vehicle[] agency) {
         System.out.println("Please enter the new flag:");
         Scanner scanner = new Scanner(System.in);
         String newFlag = scanner.next();
@@ -74,7 +74,7 @@ public class Main {
         }
     }
 
-    private static void testDrive(Vehicle[] agency) {
+    public static void testDrive(Vehicle[] agency) {
         System.out.println("Which vehicle would you like to test drive?");
         printAgency(agency);
         Scanner scanner = new Scanner(System.in);
@@ -134,9 +134,20 @@ public class Main {
                 int maxPassengers = scanner.nextInt();
                 System.out.println("Please enter the maximum speed:");
                 int maxSpeed = scanner.nextInt();
-//                System.out.println("Please enter the wind direction:\n");
-//                boolean withWindDirection = scanner.nextBoolean();
-                vehicle = new Frigate(model, maxPassengers, maxSpeed, true);
+                do {
+                    System.out.println("Please enter the wind direction:");
+                    System.out.println("1 - with the wind");
+                    System.out.println("2 - against the wind");
+                    System.out.println("Please enter your option:");
+                    int windDirection = scanner.nextInt();
+                    if (windDirection == 1) {
+                        vehicle = new Frigate(model, maxPassengers, maxSpeed, true);
+                    } else if (windDirection == 2) {
+                        vehicle = new Frigate(model, maxPassengers, maxSpeed, false);
+                    } else {
+                        System.out.println("Invalid option. Please choose again.");
+                    }
+                } while (vehicle == null);
             }
             case 3 -> {
                 System.out.println("Please enter the power source of the Spy glider:");
