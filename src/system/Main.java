@@ -168,7 +168,8 @@ public class Main {
         return agency;
     }
     private static Vehicle[] buyVehicle(Vehicle[] agency) {
-        System.out.println("In order to buy a vehicle, you must fill in the vehicle details exactly as in the following list:");
+        System.out.println("In order to buy a vehicle, you must fill-in the vehicle details " +
+                "exactly as in the following list:");
         printAgency(agency);
         Vehicle vehicle = createVehicle();
         if (vehicle == null) {
