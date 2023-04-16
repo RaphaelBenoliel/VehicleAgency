@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Vehicle[] Agency = null;
-        Vehicle temp = null;
+        Vehicle temp;
         for (int i = 0; i < 5; i++) {
             temp = createVehicle();
             if (temp == null) {
@@ -35,22 +35,16 @@ public class Main {
             switch (option) {
                 case 1 -> {
                     System.out.println("-----------------Buy A Vehicle Menu-----------------");
+                    assert Agency != null;
                     Agency = buyVehicle(Agency);
                 }
-                case 2 -> {
-                    System.out.println("TestVehicle");
-                }
-                case 3 -> {
-                    System.out.println("Reset_ALL_KM");
-                }
-                case 4 -> {
-                    System.out.println("ChangingFlag");
-                }
+                case 2 -> System.out.println("TestVehicle");
+                case 3 -> System.out.println("Reset_ALL_KM");
+                case 4 -> System.out.println("ChangingFlag");
                 case 5 -> {
                     System.out.println("Goodbye!");
                     scanner.close();
                     System.exit(0);
-                    break;
                 }
                 default -> System.out.println("Invalid option. Please choose again.");
             }
@@ -63,9 +57,7 @@ public class Main {
             Agency[0] = vehicle;
         } else {
             Vehicle[] temp = new Vehicle[Agency.length + 1];
-            for (int i = 0; i < Agency.length; i++) {
-                temp[i] = Agency[i];
-            }
+            System.arraycopy(Agency, 0, temp, 0, Agency.length);
             temp[temp.length - 1] = vehicle;
             Agency = temp;
         }
@@ -87,7 +79,7 @@ public class Main {
 
 
         switch (type) {
-            case 1:
+            case 1 -> {
                 System.out.println("Please enter the model of the Jeep:");
                 String model = scanner.nextLine();
                 System.out.println("Please enter the maximum speed:");
@@ -98,28 +90,25 @@ public class Main {
                 int engineLife = scanner.nextInt();
                 scanner.nextLine(); // consume the new line character
                 vehicle = new Jeep(model, maxSpeed, fuelConsumption, engineLife);
-                break;
-            case 2:
+            }
+            case 2 -> {
                 System.out.println("Please enter the model of the Frigate:");
-                model = scanner.nextLine();
+                String model = scanner.nextLine();
                 System.out.println("Please enter the maximum number of passengers:");
                 int maxPassengers = scanner.nextInt();
                 System.out.println("Please enter the maximum speed:");
-                maxSpeed = scanner.nextInt();
+                int maxSpeed = scanner.nextInt();
 //                System.out.println("Please enter the wind direction:\n");
 //                boolean withWindDirection = scanner.nextBoolean();
                 vehicle = new Frigate(model, maxPassengers, maxSpeed, true);
-                break;
-            case 3:
+            }
+            case 3 -> {
                 System.out.println("Please enter the power source of the Spy glider:");
                 String powerSource = scanner.nextLine();
                 vehicle = new SpyGlider(powerSource);
-                break;
-            case 4:
-                vehicle = new GameGlider();
-                break;
-            default:
-                System.out.println("Invalid option. Please choose again.");
+            }
+            case 4 -> vehicle = new GameGlider();
+            default -> System.out.println("Invalid option. Please choose again.");
         }
         return vehicle;
     }
