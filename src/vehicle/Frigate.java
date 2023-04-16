@@ -14,7 +14,7 @@ public class Frigate extends SeaTransportation implements Motorized {
         averageFuelConsumption = fuelConsumption;
     }
     @Override
-    public float getAverageFuelConsumption() {
+    public int getAverageFuelConsumption() {
         return averageFuelConsumption;
     }
 

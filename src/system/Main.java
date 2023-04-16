@@ -5,24 +5,19 @@ import vehicle.*;
 import java.util.Scanner;
 
 public class Main {
-    private enum Option {
-        BuyVehicle, TestVehicle, Reset_ALL_KM, ChangingFlag, Exit
-    }
     public static void main(String[] args) {
-
         Vehicle[] Agency = null;
         Vehicle temp = null;
         for (int i = 0; i < 5; i++) {
-           temp = createVehicle(Agency);
-           if (temp == null){
-               System.out.println("Invalid vehicle type. Please try again.");
-               i--;
-               continue;
-           }
-           else{
-               Agency = addVehicle(Agency, temp);
-           }
+            temp = createVehicle();
+            if (temp == null) {
+                System.out.println("Invalid vehicle type. Please try again.");
+                i--;
+            } else {
+                Agency = addVehicle(Agency, temp);
+            }
         }
+        assert Agency != null;
         for (Vehicle vehicle : Agency) {
             System.out.println(vehicle);
         }
@@ -30,51 +25,43 @@ public class Main {
 
         while (true) {
             System.out.println("Please choose an option:");
-            System.out.println("1. Add a vehicle");
-            System.out.println("2. Buy a vehicle");
-            System.out.println("3. Test drive a vehicle");
-            System.out.println("4. Reset distance traveled for all vehicles");
-            System.out.println("5. Change flag for all vessels");
-            System.out.println("6. Exit");
-
-            Option option = scanner.nextInt() == 1 ? Option.BuyVehicle :
-                    scanner.nextInt() == 2 ? Option.TestVehicle :
-                            scanner.nextInt() == 3 ? Option.Reset_ALL_KM :
-                                    scanner.nextInt() == 4 ? Option.ChangingFlag :
-                                            Option.Exit;
+            System.out.println("1. Buy a vehicle");
+            System.out.println("2. Test drive a vehicle");
+            System.out.println("3. Reset distance traveled for all vehicles");
+            System.out.println("4. Change flag for all vessels");
+            System.out.println("5. Exit");
+            System.out.println("Please enter your option: ");
+            int option = scanner.nextInt();
             switch (option) {
-                case BuyVehicle:
-                    System.out.println("BuyVehicle");
-
-
-                    break;
-                case TestVehicle:
+                case 1 -> {
+                    System.out.println("-----------------Buy A Vehicle Menu-----------------");
+                    Agency = buyVehicle(Agency);
+                }
+                case 2 -> {
                     System.out.println("TestVehicle");
-                    break;
-                case Reset_ALL_KM:
+                }
+                case 3 -> {
                     System.out.println("Reset_ALL_KM");
-                    break;
-                case ChangingFlag:
+                }
+                case 4 -> {
                     System.out.println("ChangingFlag");
-                    break;
-                case Exit:
+                }
+                case 5 -> {
                     System.out.println("Goodbye!");
                     scanner.close();
                     System.exit(0);
                     break;
-                default:
-                    System.out.println("Invalid option. Please choose again.");
+                }
+                default -> System.out.println("Invalid option. Please choose again.");
             }
         }
+    }//end of method main
 
-    }
     public static Vehicle[] addVehicle(Vehicle[] Agency, Vehicle vehicle) {
         if (Agency == null) {
             Agency = new Vehicle[1];
             Agency[0] = vehicle;
-        }
-        else
-        {
+        } else {
             Vehicle[] temp = new Vehicle[Agency.length + 1];
             for (int i = 0; i < Agency.length; i++) {
                 temp[i] = Agency[i];
@@ -84,7 +71,8 @@ public class Main {
         }
         return Agency;
     }
-    public static Vehicle createVehicle(Vehicle[] Agency) {
+
+    public static Vehicle createVehicle() {
         Vehicle vehicle = null;
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please choose a vehicle type:");
@@ -92,6 +80,7 @@ public class Main {
         System.out.println("2. Frigate");
         System.out.println("3. Spy glider");
         System.out.println("4. Game glider");
+        System.out.print("Please enter your option: ");
 
         int type = scanner.nextInt();
         scanner.nextLine(); // consume the new line character
@@ -101,23 +90,23 @@ public class Main {
             case 1:
                 System.out.println("Please enter the model of the Jeep:");
                 String model = scanner.nextLine();
-                System.out.println("Please enter the maximum number of passengers:");
-                int maxPassengers = scanner.nextInt();
                 System.out.println("Please enter the maximum speed:");
                 int maxSpeed = scanner.nextInt();
-                System.out.println("Please enter the number of wheels:");
-                int wheels = scanner.nextInt();
+                System.out.println("Please enter the Fuel Consumption:");
+                int fuelConsumption = scanner.nextInt();
+                System.out.println("Please enter the engine life years:");
+                int engineLife = scanner.nextInt();
                 scanner.nextLine(); // consume the new line character
-                vehicle = new Jeep(model, maxPassengers, maxSpeed, wheels);
+                vehicle = new Jeep(model, maxSpeed, fuelConsumption, engineLife);
                 break;
             case 2:
                 System.out.println("Please enter the model of the Frigate:");
                 model = scanner.nextLine();
                 System.out.println("Please enter the maximum number of passengers:");
-                maxPassengers = scanner.nextInt();
+                int maxPassengers = scanner.nextInt();
                 System.out.println("Please enter the maximum speed:");
                 maxSpeed = scanner.nextInt();
-//                System.out.println("Please enter the wind direction:");
+//                System.out.println("Please enter the wind direction:\n");
 //                boolean withWindDirection = scanner.nextBoolean();
                 vehicle = new Frigate(model, maxPassengers, maxSpeed, true);
                 break;
@@ -134,10 +123,46 @@ public class Main {
         }
         return vehicle;
     }
-    public static void buyVehicle (Vehicle[]Agency){
-            for (Vehicle vehicle : Agency)
-                System.out.println(vehicle);
 
-
+    public static Vehicle[] removeVehicle(Vehicle[] agency, int index) {
+        Vehicle[] temp = new Vehicle[agency.length - 1];
+        int j = 0;
+        for (int i = 0; i < agency.length; i++) {
+            if(i != index) {
+                temp[j] = agency[i];
+                j++;
+            }
+        }
+        agency = temp;
+        return agency;
     }
-}
+
+    private static Vehicle[] buyVehicle(Vehicle[] agency) {
+        System.out.println("In order to buy a vehicle, you must fill in the vehicle details exactly as in the following list:");
+        if(agency.length == 0) {
+            System.out.println("There are no vehicles in the agency.");
+            return null;
+        }
+        for (int i = 0; i < agency.length; i++) {
+            System.out.println(i + 1 + ". " + agency[i]);
+        }
+        Vehicle vehicle = createVehicle();
+        if (vehicle == null) {
+            System.out.println("Invalid vehicle type. Please try again.");
+        } else {
+            for (int i = 0; i < agency.length; i++) {
+                if(agency[i].equals(vehicle)){
+
+                    System.out.println("Vehicle found in the agency!");
+                    agency = removeVehicle(agency, i);
+                    System.out.println("Vehicle successfully purchased!");
+                    break;
+                }
+                else {
+                    System.out.println("Vehicle not found in the agency!");
+                }
+            }
+        }
+        return agency;
+    }
+}// end of class Main

@@ -25,7 +25,7 @@ public class Jeep extends LandTransportation implements Motorized,Commercial {
     @Override
     public void setAverageFuelConsumption(int fuelConsumption) { averageFuelConsumption = fuelConsumption; }
     @Override
-    public float getAverageFuelConsumption() { return averageFuelConsumption; }
+    public int getAverageFuelConsumption() { return averageFuelConsumption; }
     @Override
     public void setAverageEngineLife(int engineLife) { averageEngineLife = engineLife; }
     @Override
