@@ -41,12 +41,24 @@ public class Main {
                     testDrive(Agency);
                 }
                 case 3 -> {
-                    System.out.println("Reset All Vehicle Kilometer");
+                    System.out.println("=============== Reset All Vehicle Kilometer ===============");
                     if (Agency != null) {
                         resetAllVehicleKilometer(Agency);
                     }
                 }
-                case 4 -> System.out.println("ChangingFlag");
+                case 4 -> {
+                    System.out.println("=================== Changing Vessels Flags ===================");
+                    System.out.println("Please enter the new flag:");
+                    String newFlag = scanner.next();
+                    if (Agency != null) {
+                        for (Vehicle vehicle : Agency) {
+                            if (vehicle instanceof SeaTransportation) {
+                                ((SeaTransportation) vehicle).setCountryFlag(newFlag);
+                            }
+                        }
+                        System.out.println("All vessels flags has been changed successfully.");
+                    }
+                }
                 case 5 -> {
                     System.out.println("Goodbye!");
                     scanner.close();
@@ -61,7 +73,7 @@ public class Main {
         System.out.println("Which vehicle would you like to test drive?");
         printAgency(agency);
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Please enter your option [1-" + agency.length + "]:");
+        System.out.print("Please enter your option [1-" + agency.length + "]: ");
         int option = scanner.nextInt();
         if(option > 0 && option <= agency.length) {
             System.out.println("The selected vehicle is:\n" + agency[option - 1]);
@@ -69,7 +81,7 @@ public class Main {
             int distance = scanner.nextInt();
             agency[option - 1].move(distance);
             System.out.println("The test drive is completed. The distance traveled is " +
-                    agency[option - 1].getDistanceTraveled()+ "Kilometer.");
+                    agency[option - 1].getDistanceTraveled()+ " Kilometer.");
 
         }
         else {
@@ -155,7 +167,6 @@ public class Main {
         agency = temp;
         return agency;
     }
-
     private static Vehicle[] buyVehicle(Vehicle[] agency) {
         System.out.println("In order to buy a vehicle, you must fill in the vehicle details exactly as in the following list:");
         printAgency(agency);
@@ -187,5 +198,4 @@ public class Main {
             System.out.println(i + 1 + ". " + agency[i]);
         }
     }
-
 }// end of class Main
