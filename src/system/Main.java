@@ -11,7 +11,8 @@ public class Main {
             if (temp == null) {
                 System.out.println("Invalid vehicle type. Please try again.");
                 i--;
-            } else {
+            }
+            else {
                 Agency = addVehicle(Agency, temp);
             }
         }
@@ -29,16 +30,21 @@ public class Main {
             switch (option) {
                 case 1 -> {
                     System.out.println("=================== Buy A Vehicle Menu ===================");
-                    if(Agency.length == 0) {
+                    if (Agency != null && Agency.length == 0) {
                         System.out.println("There are no vehicles in the agency.");
                         break;
                     }
                     Agency = buyVehicle(Agency);
                 }
-                case 2 -> System.out.println("=================== Test A Vehicle ===================");
+                case 2 -> {
+                    System.out.println("=================== Test A Vehicle ===================");
+                    testDrive(Agency);
+                }
                 case 3 -> {
                     System.out.println("Reset All Vehicle Kilometer");
-                    resetAllVehicleKilometer(Agency);
+                    if (Agency != null) {
+                        resetAllVehicleKilometer(Agency);
+                    }
                 }
                 case 4 -> System.out.println("ChangingFlag");
                 case 5 -> {
@@ -50,6 +56,26 @@ public class Main {
             }
         }
     }//end of method main
+
+    private static void testDrive(Vehicle[] agency) {
+        System.out.println("Which vehicle would you like to test drive?");
+        printAgency(agency);
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Please enter your option [1-" + agency.length + "]:");
+        int option = scanner.nextInt();
+        if(option > 0 && option <= agency.length) {
+            System.out.println("The selected vehicle is:\n" + agency[option - 1]);
+            System.out.println("Please enter the distance of the test drive:");
+            int distance = scanner.nextInt();
+            agency[option - 1].move(distance);
+            System.out.println("The test drive is completed. The distance traveled is " +
+                    agency[option - 1].getDistanceTraveled()+ "Kilometer.");
+
+        }
+        else {
+            System.out.println("Invalid option. Please try again.");
+        }
+    }
 
     public static void resetAllVehicleKilometer(Vehicle[] agency) {
         for (Vehicle vehicle : agency) {
@@ -137,19 +163,25 @@ public class Main {
         if (vehicle == null) {
             System.out.println("Invalid vehicle type. Please try again.");
         } else {
+            boolean flag = false;
+            System.out.println("Please enter the vehicle distance traveled:");
+            int distance = new Scanner(System.in).nextInt();
+            vehicle.setDistanceTraveled(distance);
             for (int i = 0; i < agency.length; i++) {
                 if (agency[i].equals(vehicle)) {
                     System.out.println("Vehicle found in the agency!");
                     agency = removeVehicle(agency, i);
                     System.out.println("Vehicle successfully purchased!");
+                    flag = true;
                     break;
                 }
             }
-            System.out.println("Vehicle not found in our agency! Please try another.");
+            if (!flag) {
+                System.out.println("Vehicle not found in our agency! Please try another.");
+            }
         }
         return agency;
     }
-
     private static void printAgency(Vehicle[] agency) {
         for (int i = 0; i < agency.length; i++) {
             System.out.println(i + 1 + ". " + agency[i]);
