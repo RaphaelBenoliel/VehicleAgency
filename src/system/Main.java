@@ -1,7 +1,5 @@
 package system;
-
 import vehicle.*;
-
 import java.util.Scanner;
 
 public class Main {
@@ -17,12 +15,7 @@ public class Main {
                 Agency = addVehicle(Agency, temp);
             }
         }
-        assert Agency != null;
-        for (Vehicle vehicle : Agency) {
-            System.out.println(vehicle);
-        }
         Scanner scanner = new Scanner(System.in);
-
         while (true) {
             System.out.println("============== Welcome to the vehicle agency! ==============");
             System.out.println("Please choose an option:");
@@ -43,7 +36,10 @@ public class Main {
                     Agency = buyVehicle(Agency);
                 }
                 case 2 -> System.out.println("=================== Test A Vehicle ===================");
-                case 3 -> System.out.println("Reset All Vehicle Kilometer");
+                case 3 -> {
+                    System.out.println("Reset All Vehicle Kilometer");
+                    resetAllVehicleKilometer(Agency);
+                }
                 case 4 -> System.out.println("ChangingFlag");
                 case 5 -> {
                     System.out.println("Goodbye!");
@@ -55,17 +51,10 @@ public class Main {
         }
     }//end of method main
 
-    public static Vehicle[] addVehicle(Vehicle[] Agency, Vehicle vehicle) {
-        if (Agency == null) {
-            Agency = new Vehicle[1];
-            Agency[0] = vehicle;
-        } else {
-            Vehicle[] temp = new Vehicle[Agency.length + 1];
-            System.arraycopy(Agency, 0, temp, 0, Agency.length);
-            temp[temp.length - 1] = vehicle;
-            Agency = temp;
+    public static void resetAllVehicleKilometer(Vehicle[] agency) {
+        for (Vehicle vehicle : agency) {
+            vehicle.setDistanceTraveled(0);
         }
-        return Agency;
     }
 
     public static Vehicle createVehicle() {
@@ -116,7 +105,18 @@ public class Main {
         }
         return vehicle;
     }
-
+    public static Vehicle[] addVehicle(Vehicle[] agency, Vehicle vehicle) {
+        if (agency == null) {
+            agency = new Vehicle[1];
+            agency[0] = vehicle;
+        } else {
+            Vehicle[] temp = new Vehicle[agency.length + 1];
+            System.arraycopy(agency, 0, temp, 0, agency.length);
+            temp[temp.length - 1] = vehicle;
+            agency = temp;
+        }
+        return agency;
+    }
     public static Vehicle[] removeVehicle(Vehicle[] agency, int index) {
         Vehicle[] temp = new Vehicle[agency.length - 1];
         int j = 0;
@@ -132,10 +132,7 @@ public class Main {
 
     private static Vehicle[] buyVehicle(Vehicle[] agency) {
         System.out.println("In order to buy a vehicle, you must fill in the vehicle details exactly as in the following list:");
-
-        for (int i = 0; i < agency.length; i++) {
-            System.out.println(i + 1 + ". " + agency[i]);
-        }
+        printAgency(agency);
         Vehicle vehicle = createVehicle();
         if (vehicle == null) {
             System.out.println("Invalid vehicle type. Please try again.");
@@ -148,8 +145,15 @@ public class Main {
                     break;
                 }
             }
-            System.out.println("Vehicle not found in the agency! Please try again.");
+            System.out.println("Vehicle not found in our agency! Please try another.");
         }
         return agency;
     }
+
+    private static void printAgency(Vehicle[] agency) {
+        for (int i = 0; i < agency.length; i++) {
+            System.out.println(i + 1 + ". " + agency[i]);
+        }
+    }
+
 }// end of class Main
