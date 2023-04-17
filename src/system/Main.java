@@ -4,18 +4,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Vehicle[] Agency = null;
-        Vehicle temp;
-        for (int i = 0; i < 5; i++) {
-            temp = createVehicle();
-            if (temp == null) {
-                System.out.println("Invalid vehicle type. Please try again.");
-                i--;
-            }
-            else {
-                Agency = addVehicle(Agency, temp);
-            }
-        }
+        Vehicle[] Agency =  initAgency();//initialize the agency
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("============== Welcome to the vehicle agency! ==============");
@@ -60,6 +49,35 @@ public class Main {
         }
     }//end of method main
 
+    private static Vehicle[] initAgency() {
+        Vehicle[] agency= null;
+        Vehicle temp;
+        System.out.println("initializing agency...");
+        String in = "y";
+        while(in.equals("y")) {
+            temp = createVehicle();
+            if (temp == null) {
+                System.out.println("Invalid vehicle type. Please try again.");
+            }
+            else {
+                agency = addVehicle(agency, temp);
+            }
+            System.out.println("Would you like to add another vehicle? [y/n]");
+            Scanner scanner = new Scanner(System.in);
+            in = scanner.next();
+        }
+//        for (int i = 0; i < 5; i++) {
+//            temp = createVehicle();
+//            if (temp == null) {
+//                System.out.println("Invalid vehicle type. Please try again.");
+//                i--;
+//            }
+//            else {
+//                agency = addVehicle(agency, temp);
+//            }
+//        }
+        return agency;
+    }
     public static void changeVesselsFlags(Vehicle[] agency) {
         System.out.println("Please enter the new flag:");
         Scanner scanner = new Scanner(System.in);
@@ -73,7 +91,6 @@ public class Main {
             System.out.println("All vessels flags has been changed successfully.");
         }
     }
-
     public static void testDrive(Vehicle[] agency) {
         System.out.println("Which vehicle would you like to test drive?");
         printAgency(agency);
@@ -93,13 +110,11 @@ public class Main {
             System.out.println("Invalid option. Please try again.");
         }
     }
-
     public static void resetAllVehicleKilometer(Vehicle[] agency) {
         for (Vehicle vehicle : agency) {
             vehicle.setDistanceTraveled(0);
         }
     }
-
     public static Vehicle createVehicle() {
         Vehicle vehicle = null;
         Scanner scanner = new Scanner(System.in);
@@ -109,11 +124,8 @@ public class Main {
         System.out.println("3. Spy glider");
         System.out.println("4. Game glider");
         System.out.print("Please enter your option: ");
-
         int type = scanner.nextInt();
         scanner.nextLine(); // consume the new line character
-
-
         switch (type) {
             case 1 -> {
                 System.out.println("Please enter the model of the Jeep:");
