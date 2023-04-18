@@ -2,36 +2,35 @@ package vehicle;
 
 import java.util.Objects;
 
+/**
+ * The GameGlider class represents a toy Aerial vehicle, non-motorized for civil use and have an energy score.
+ */
 public class GameGlider extends AirTransportation implements noMotorized{
     private String powerSource;
     private EnergyScore energyScore;
+    /**
+     * Constructs a GameGlider object with the given model, maximum number of passengers, maximum speed,
+     * and energy score. all data members is by default.
+     */
     public GameGlider( ) {
         super("Toy", 0, 10, "civilian");
         setPowerSource("manually");
         setEnergyScore(EnergyScore.A);
     }
     @Override
-    public void setPowerSource(String powerSource) {
-        this.powerSource = powerSource;
-    }
+    public void setPowerSource(String powerSource) { this.powerSource = powerSource; }
 
     @Override
-    public void setEnergyScore(EnergyScore score) {
-        this.energyScore = score;
-    }
+    public void setEnergyScore(EnergyScore score) { this.energyScore = score; }
 
     @Override
-    public String getPowerSource() {
-        return powerSource;
-    }
+    public String getPowerSource() { return powerSource; }
 
     @Override
-    public EnergyScore getEnergyScore() {
-        return energyScore;
-    }
-    public String getName(){
-        return "GameGlider";
-    }
+    public EnergyScore getEnergyScore() { return energyScore; }
+    public String getName(){ return "GameGlider"; }
+
+    @Override
     public String toString(){
         return getName() +": "+ super.toString() + " It's source power is " + getPowerSource() +
                 " and has a energy score of " + getEnergyScore() + ".";
@@ -46,4 +45,4 @@ public class GameGlider extends AirTransportation implements noMotorized{
         if (!Objects.equals(powerSource, that.powerSource)) return false;
         return energyScore == that.energyScore;
     }
-}
+}// End of GameGlider class

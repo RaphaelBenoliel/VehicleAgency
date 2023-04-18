@@ -46,14 +46,14 @@ public class Main {
                 default -> System.out.println("Invalid option. Please choose again.");
             }
         }
-    }//end of method main
+    }// End of method main
 
     private static Vehicle[] initAgency() {
         Vehicle[] agency= null;
         Vehicle temp;
         System.out.println("initializing agency...");
-        String in = "y";
-        while(in.equals("y")) {
+        String inputAns = "y";
+        while(inputAns.equals("y")) {
             temp = createVehicle();
             if (temp == null) {
                 System.out.println("Invalid vehicle type. Please try again.");
@@ -63,7 +63,7 @@ public class Main {
             }
             System.out.println("Would you like to add another vehicle? [y/n]");
             Scanner scanner = new Scanner(System.in);
-            in = scanner.next();
+            inputAns = scanner.next();
         }
 //        for (int i = 0; i < 5; i++) {
 //            temp = createVehicle();
@@ -226,4 +226,4 @@ public class Main {
             System.out.println(i + 1 + ". " + agency[i]);
         }
     }
-}// end of class Main
+}// End of class Main

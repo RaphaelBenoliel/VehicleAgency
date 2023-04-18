@@ -37,4 +37,4 @@ public abstract class SeaTransportation extends Vehicle{
         result += withWindDirection ? "with" : "against";
         return result + " the wind.";
     }
-}
+}// End of SeaTransportation class

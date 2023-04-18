@@ -29,4 +29,4 @@ public abstract class LandTransportation extends Vehicle {
         if (wheels != that.wheels) return false;
         return Objects.equals(roadType, that.roadType);
     }
-}
+}// End of LandTransportation class

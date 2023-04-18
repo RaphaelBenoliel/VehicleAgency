@@ -34,6 +34,7 @@ public class SpyGlider extends AirTransportation implements noMotorized{
     public String getName(){
         return "SpyGlider";
     }
+    @Override
     public String toString(){
         return getName() +": "+ super.toString() + " It's source power is " + getPowerSource() +
                 " and has a energy score of " + getEnergyScore() + ".";
@@ -50,5 +51,4 @@ public class SpyGlider extends AirTransportation implements noMotorized{
             return false;
         return energyScore == spyGlider.energyScore;
     }
-
-}
+}// End of SpyGlider class

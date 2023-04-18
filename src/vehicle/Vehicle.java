@@ -1,7 +1,9 @@
 package vehicle;
 
 import java.util.Objects;
-
+/**
+ * The Vehicle class represents a generic vehicle.
+ */
 public abstract class Vehicle {
     protected String model;
     protected int distanceTraveled;
@@ -19,47 +21,44 @@ public abstract class Vehicle {
         this.maxPassengers = maxPassengers;
         this.maxSpeed = maxSpeed;
     }
+    /**
+     * Moves the vehicle by the specified distance.
+     * @param distance the distance to move the vehicle in km.
+     */
+    public void move(int distance) { this.distanceTraveled += distance; }
 
-    public void move(int distance) {
-        this.distanceTraveled += distance;
-    }
+    public String getModel() { return this.model; }
 
-    public String getModel() {
-        return this.model;
-    }
+    public int getDistanceTraveled() { return this.distanceTraveled; }
 
-    public int getDistanceTraveled() {
-        return this.distanceTraveled;
-    }
+    public int getMaxPassengers() { return this.maxPassengers; }
 
-    public int getMaxPassengers() {
-        return this.maxPassengers;
-    }
+    public int getMaxSpeed() { return this.maxSpeed; }
 
-    public int getMaxSpeed() {
-        return this.maxSpeed;
-    }
+    public void setModel(String model) { this.model = model; }
 
-    public void setModel(String model) {
-        this.model = model;
-    }
+    public void setDistanceTraveled(int distanceTraveled) { this.distanceTraveled = distanceTraveled; }
 
-    public void setDistanceTraveled(int distanceTraveled) {
-        this.distanceTraveled = distanceTraveled;
-    }
+    public void setMaxPassengers(int maxPassengers) { this.maxPassengers = maxPassengers; }
 
-    public void setMaxPassengers(int maxPassengers) {
-        this.maxPassengers = maxPassengers;
-    }
+    public void setMaxSpeed(int maxSpeed) { this.maxSpeed = maxSpeed; }
 
-    public void setMaxSpeed(int maxSpeed) {
-        this.maxSpeed = maxSpeed;
-    }
-
+    /**
+     * Returns a string representation of the vehicle, including its model, distance traveled, maximum speed,
+     * and maximum number of passengers.
+     * @return a string representation of the vehicle
+     */
+    @Override
     public String toString() {
         return "Model: " + this.model + ", Traveled: " + this.distanceTraveled + "KM, Max Speed of " + this.maxSpeed +
                 "Mph, can carry max of " + this.maxPassengers + " people.";
     }
+
+    /**
+     * Determines whether two Vehicle objects are equal by comparing all data members.
+     * @param o the object to compare to this one
+     * @return true if this object is the same as the o argument; false otherwise
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -71,4 +70,4 @@ public abstract class Vehicle {
         if (maxSpeed != vehicle.maxSpeed) return false;
         return Objects.equals(model, vehicle.model);
     }
-}
+}// End of Vehicle class
