@@ -31,9 +31,8 @@ public class Main {
                 }
                 case 3 -> {
                     System.out.println("=============== Reset All Vehicle Kilometer ===============");
-                    if (Agency != null) {
+                    if (Agency != null)
                         resetAllVehicleKilometer(Agency);
-                    }
                 }
                 case 4 -> {
                     System.out.println("=================== Changing Vessels Flags ===================");
