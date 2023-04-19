@@ -8,6 +8,13 @@ public class Jeep extends LandTransportation implements Motorized,Commercial {
     private int averageEngineLife;
     private licenseType licenseType;
 
+    /**
+     * Constructs a new Jeep object.
+     * @param model a String representing the model of the Jeep.
+     * @param maxSpeed an integer representing the maximum speed of the Jeep in kilometers per hour.
+     * @param fuelConsumption an integer representing the average fuel consumption in liters per 100 kilometers.
+     * @param engineLife an integer representing the average engine life in years.
+     */
     public Jeep(String model, int maxSpeed, int fuelConsumption, int engineLife) {
         super(model, 5, maxSpeed, 4, "off-road");
         setLicenseType(vehicle.licenseType.MINI);
@@ -33,11 +40,13 @@ public class Jeep extends LandTransportation implements Motorized,Commercial {
     @Override
     public int getAverageEngineLife() { return averageEngineLife; }
 
-//    public String getName(){ return "Jeep"; }
     @Override
     public String toString(){
-        return this.getClass().getSimpleName() +": "+ super.toString() + " It has a " + getLicenseType() + " license." + " Engine: " +
-                getAverageFuelConsumption() + "L, lifetime of " + getAverageEngineLife() + " years.";
+        return this.getClass().getSimpleName() + ": " +
+                super.toString() +
+                " It has a " + getLicenseType() + " license." +
+                " Engine: " + getAverageFuelConsumption() + "L, " +
+                "lifetime of " + getAverageEngineLife() + " years.";
     }
     @Override
     public boolean equals(Object o) {

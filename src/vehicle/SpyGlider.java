@@ -2,9 +2,17 @@ package vehicle;
 
 import java.util.Objects;
 
+/**
+ * The SpyGlider class represents a military Aerial vehicle, non-motorized for military use and have an energy score.
+ */
 public class SpyGlider extends AirTransportation implements noMotorized{
     private String powerSource;
     private EnergyScore energyScore;
+    /**
+     * Constructs a SpyGlider object with the given model, maximum number of passengers, maximum speed,
+     * and energy score. all data members is by default.
+     * @param PowerSource the source of power of the SpyGlider
+     */
     public SpyGlider(String PowerSource)
     {
         super("privileged", 1, 50, "Military");
@@ -31,12 +39,12 @@ public class SpyGlider extends AirTransportation implements noMotorized{
     public EnergyScore getEnergyScore() {
         return energyScore;
     }
-    public String getName(){
-        return "SpyGlider";
-    }
+
     @Override
     public String toString(){
-        return getName() +": "+ super.toString() + " It's source power is " + getPowerSource() +
+        return this.getClass().getSimpleName() +": "+
+                super.toString() +
+                " It's source power is " + getPowerSource() +
                 " and has a energy score of " + getEnergyScore() + ".";
     }
     @Override

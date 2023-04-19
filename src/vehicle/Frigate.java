@@ -29,15 +29,17 @@ public class Frigate extends SeaTransportation implements Motorized {
     @Override
     public int getAverageEngineLife() { return averageEngineLife; }
 
-    public String getName(){ return "Frigate"; }
+
     /**
      * toString method for Frigate objects.
      * @return a string representation of the Frigate object
      */
     @Override
     public String toString(){
-       return getName() +": "+ super.toString() + " Engine: " + getAverageFuelConsumption() + "L, lifetime of " +
-               getAverageEngineLife() + " years.";
+       return this.getClass().getSimpleName() +": " +
+               super.toString() +
+               " Engine: " + getAverageFuelConsumption() + "L, " +
+               "lifetime of " + getAverageEngineLife() + " years.";
     }
     /**
      * Determines whether two Frigate objects are equal by comparing all data members.

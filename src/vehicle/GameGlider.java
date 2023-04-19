@@ -28,11 +28,10 @@ public class GameGlider extends AirTransportation implements noMotorized{
 
     @Override
     public EnergyScore getEnergyScore() { return energyScore; }
-    public String getName(){ return "GameGlider"; }
 
     @Override
     public String toString(){
-        return getName() +": "+ super.toString() + " It's source power is " + getPowerSource() +
+        return this.getClass().getSimpleName() +": "+ super.toString() + " It's source power is " + getPowerSource() +
                 " and has a energy score of " + getEnergyScore() + ".";
     }
     @Override
