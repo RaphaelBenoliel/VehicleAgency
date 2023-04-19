@@ -1,8 +1,12 @@
 package system;
 import vehicle.*;
-import java.util.Scanner;
 
+import java.util.Scanner;
+/**
+ * Main class for the vehicle agency.
+ */
 public class Main {
+
     public static void main(String[] args) {
         Vehicle[] Agency =  initAgency();//initialize the agency
         Scanner scanner = new Scanner(System.in);
@@ -48,35 +52,30 @@ public class Main {
         }
     }// End of method main
 
+    /**
+     * method to initialize the agency.
+     * @return the agency array.
+     */
     private static Vehicle[] initAgency() {
-        Vehicle[] agency= null;
+        Vehicle[] agency = null;
         Vehicle temp;
         System.out.println("initializing agency...");
         String inputAns = "y";
         while(inputAns.equals("y")) {
             temp = createVehicle();
-            if (temp == null) {
-                System.out.println("Invalid vehicle type. Please try again.");
-            }
-            else {
-                agency = addVehicle(agency, temp);
-            }
+            if (temp == null) System.out.println("Invalid vehicle type. Please try again.");
+            else agency = addVehicle(agency, temp);
             System.out.println("Would you like to add another vehicle? [y/n]");
             Scanner scanner = new Scanner(System.in);
             inputAns = scanner.next();
         }
-//        for (int i = 0; i < 5; i++) {
-//            temp = createVehicle();
-//            if (temp == null) {
-//                System.out.println("Invalid vehicle type. Please try again.");
-//                i--;
-//            }
-//            else {
-//                agency = addVehicle(agency, temp);
-//            }
-//        }
         return agency;
     }
+
+    /**
+     * method to change all vessels flags to a new flag entered by the user.
+     * @param agency the agency array.
+     */
     public static void changeVesselsFlags(Vehicle[] agency) {
         System.out.println("Please enter the new flag:");
         Scanner scanner = new Scanner(System.in);
@@ -90,6 +89,10 @@ public class Main {
             System.out.println("All vessels flags has been changed successfully.");
         }
     }
+    /**
+     * method to test drive a vehicle.
+     * @param agency the agency array.
+     */
     public static void testDrive(Vehicle[] agency) {
         System.out.println("Which vehicle would you like to test drive?");
         printAgency(agency);
@@ -101,19 +104,30 @@ public class Main {
             System.out.println("Please enter the distance of the test drive:");
             int distance = scanner.nextInt();
             agency[option - 1].move(distance);
-            System.out.println("The test drive is completed. The distance traveled is " +
-                    agency[option - 1].getDistanceTraveled()+ " Kilometer.");
+            System.out.println("\nThe test drive is completed. The distance traveled is " +
+                    agency[option - 1].getDistanceTraveled()+ " Kilometer.\n\n");
 
         }
         else {
             System.out.println("Invalid option. Please try again.");
         }
     }
+
+    /**
+     * method to reset all vehicle kilometer to 0.
+     * @param agency the agency array.
+     */
     public static void resetAllVehicleKilometer(Vehicle[] agency) {
         for (Vehicle vehicle : agency) {
             vehicle.setDistanceTraveled(0);
         }
+        System.out.println("\nAll vehicle kilometer has been reset successfully.\n\n");
     }
+
+    /**
+     * method to create a new vehicle object according to the user's choice.
+     * @return the new vehicle object or null if the user entered an invalid vehicle type.
+     */
     public static Vehicle createVehicle() {
         Vehicle vehicle = null;
         Scanner scanner = new Scanner(System.in);
@@ -170,11 +184,19 @@ public class Main {
         }
         return vehicle;
     }
+
+    /**
+     * method to add a vehicle to the agency array when creating a vehicle .
+     * @param agency the agency array
+     * @param vehicle the vehicle to add
+     * @return the agency array with the added vehicle
+     */
     public static Vehicle[] addVehicle(Vehicle[] agency, Vehicle vehicle) {
         if (agency == null) {
             agency = new Vehicle[1];
             agency[0] = vehicle;
-        } else {
+        }
+        else {
             Vehicle[] temp = new Vehicle[agency.length + 1];
             System.arraycopy(agency, 0, temp, 0, agency.length);
             temp[temp.length - 1] = vehicle;
@@ -182,6 +204,12 @@ public class Main {
         }
         return agency;
     }
+    /**
+     * method to removes a vehicle from the agency array when purchase a vehicle .
+     * @param agency the agency array
+     * @param index the index of the vehicle to remove
+     * @return the agency array without the removed vehicle
+     */
     public static Vehicle[] removeVehicle(Vehicle[] agency, int index) {
         Vehicle[] temp = new Vehicle[agency.length - 1];
         int j = 0;
@@ -194,33 +222,40 @@ public class Main {
         agency = temp;
         return agency;
     }
+    /**
+     * method to buy a vehicle from the agency.
+     * @param agency the agency array
+     * @return the agency array without the purchased vehicle
+     */
     private static Vehicle[] buyVehicle(Vehicle[] agency) {
         System.out.println("In order to buy a vehicle, you must fill-in the vehicle details " +
-                "exactly as in the following list:");
+                "exactly as in the following list:\n");
         printAgency(agency);
+        // creating a temporary vehicle to compare with the agency vehicles
         Vehicle vehicle = createVehicle();
-        if (vehicle == null) {
-            System.out.println("Invalid vehicle type. Please try again.");
-        } else {
-            boolean flag = false;
+
+        if (vehicle == null) System.out.println("Invalid vehicle type. Please try again.");
+        else {
             System.out.println("Please enter the vehicle distance traveled:");
             int distance = new Scanner(System.in).nextInt();
             vehicle.setDistanceTraveled(distance);
             for (int i = 0; i < agency.length; i++) {
                 if (agency[i].equals(vehicle)) {
-                    System.out.println("Vehicle found in the agency!");
+                    System.out.println("\n\nVehicle found in the agency!\n");
+                    // removing the vehicle from the agency.
                     agency = removeVehicle(agency, i);
-                    System.out.println("Vehicle successfully purchased!");
-                    flag = true;
-                    break;
+                    System.out.println("Vehicle successfully purchased!\n");
+                    return agency;
                 }
             }
-            if (!flag) {
-                System.out.println("Vehicle not found in our agency! Please try another.");
-            }
+            System.out.println("\nVehicle not found in our agency! Please try another.\n");
         }
         return agency;
     }
+    /**
+     * method to print the agency vehicles.
+     * @param agency the agency array
+     */
     private static void printAgency(Vehicle[] agency) {
         for (int i = 0; i < agency.length; i++) {
             System.out.println(i + 1 + ". " + agency[i]);
