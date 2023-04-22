@@ -29,11 +29,21 @@ public class GameGlider extends AirTransportation implements noMotorized{
     @Override
     public EnergyScore getEnergyScore() { return energyScore; }
 
+    /**
+     *  toString method to represent a GameGlider object.
+     * @return a string representation of the GameGlider object.
+     */
     @Override
     public String toString(){
         return this.getClass().getSimpleName() +": "+ super.toString() + " It's source power is " + getPowerSource() +
                 " and has a energy score of " + getEnergyScore() + ".";
     }
+
+    /**
+     * Determines whether two GameGlider objects are equal by comparing all data members.
+     * @param o the object to compare to this object
+     * @return true if the objects are equal, false otherwise
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
