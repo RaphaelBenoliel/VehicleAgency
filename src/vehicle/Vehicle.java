@@ -21,6 +21,10 @@ public abstract class Vehicle {
         this.maxPassengers = maxPassengers;
         this.maxSpeed = maxSpeed;
     }
+
+    protected Vehicle() {
+    }
+
     /**
      * Moves the vehicle by the specified distance.
      * @param distance the distance to move the vehicle in km.

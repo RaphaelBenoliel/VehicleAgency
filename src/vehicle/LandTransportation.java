@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * The LandTransportation class represents a vehicle that can move on land.
  */
-public abstract class LandTransportation extends Vehicle {
+public  class LandTransportation extends Vehicle implements ILandTransportation {
     protected int wheels;
     protected String roadType;
 

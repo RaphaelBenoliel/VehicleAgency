@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * The SeaTransportation class represents a vehicle that can move on water.
  */
-public abstract class SeaTransportation extends Vehicle{
+public class SeaTransportation extends Vehicle implements ISeaTransportation {
     protected boolean withWindDirection;
     protected String countryFlag;
     /**

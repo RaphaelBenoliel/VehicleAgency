@@ -13,36 +13,42 @@ public class Main {
         while (true) {
             System.out.println("============== Welcome to the vehicle agency! ==============");
             System.out.println("Please choose an option:");
-            System.out.println("1. Buy a vehicle");
-            System.out.println("2. Test drive a vehicle");
-            System.out.println("3. Reset distance traveled for all vehicles");
-            System.out.println("4. Change flag for all vessels");
-            System.out.println("5. Exit");
+            System.out.println("1. Add new vehicle to the agency");
+            System.out.println("2. Buy a vehicle");
+            System.out.println("3. Test drive a vehicle");
+            System.out.println("4. Reset distance traveled for all vehicles");
+            System.out.println("5. Change flag for all vessels");
+            System.out.println("6. Exit");
             System.out.println("Please enter your option: ");
             int option = scanner.nextInt();
             switch (option) {
                 case 1 -> {
-                    System.out.println("=================== Buy A Vehicle Menu ===================");
-                    if (Agency != null && Agency.length == 0) {
-                        System.out.println("There are no vehicles in the agency.");
-                        break;
-                    }
-                    Agency = buyVehicle(Agency);
+                    System.out.println("=================== Add New Vehicle ===================");
+                    Vehicle temp = createVehicle();
+                    if (temp == null) System.out.println("Invalid vehicle type. Please try again.");
+                    else Agency = addVehicle(Agency, temp);
                 }
                 case 2 -> {
-                    System.out.println("=================== Test A Vehicle ===================");
-                    testDrive(Agency);
+                    System.out.println("=================== Buy A Vehicle Menu ===================");
+                    if (Agency == null || Agency.length == 0)  System.out.println("There are no vehicles in the agency.");
+                    else Agency = buyVehicle(Agency);
                 }
                 case 3 -> {
-                    System.out.println("=============== Reset All Vehicle Kilometer ===============");
-                    if (Agency != null)
-                        resetAllVehicleKilometer(Agency);
+                    System.out.println("=================== Test A Vehicle ===================");
+                    if (Agency == null || Agency.length == 0) System.out.println("There are no vehicles in the agency.");
+                    else testDrive(Agency);
                 }
                 case 4 -> {
-                    System.out.println("=================== Changing Vessels Flags ===================");
-                    changeVesselsFlags(Agency);
+                    System.out.println("=============== Reset All Vehicle Kilometer ===============");
+                    if (Agency == null || Agency.length == 0) System.out.println("There are no vehicles in the agency.");
+                    else resetAllVehicleKilometer(Agency);
                 }
                 case 5 -> {
+                    System.out.println("=================== Changing Vessels Flags ===================");
+                    if (Agency == null || Agency.length == 0) System.out.println("There are no vehicles in the agency.");
+                    else changeVesselsFlags(Agency);
+                }
+                case 6 -> {
                     System.out.println("Goodbye!");
                     scanner.close();
                     System.exit(0);
@@ -80,13 +86,16 @@ public class Main {
         System.out.println("Please enter the new flag:");
         Scanner scanner = new Scanner(System.in);
         String newFlag = scanner.next();
+        boolean flag = false;
         if (agency != null) {
             for (Vehicle vehicle : agency) {
                 if (vehicle instanceof SeaTransportation) {
                     ((SeaTransportation) vehicle).setCountryFlag(newFlag);
+                    flag = true;
                 }
             }
-            System.out.println("All vessels flags has been changed successfully.");
+            if(flag) System.out.println("All vessels flags have been changed successfully.\n\n");
+            else System.out.println("There are no vessels in the agency.\n\n");
         }
     }
     /**
@@ -136,6 +145,8 @@ public class Main {
         System.out.println("2. Frigate");
         System.out.println("3. Spy glider");
         System.out.println("4. Game glider");
+        System.out.println("5. Amphibious");
+
         System.out.print("Please enter your option: ");
         int type = scanner.nextInt();
         scanner.nextLine(); // consume the new line character
@@ -180,6 +191,38 @@ public class Main {
                 vehicle = new SpyGlider(powerSource);
             }
             case 4 -> vehicle = new GameGlider();
+            case 5 -> {
+                System.out.println("Please enter the model of the Amphibious:");
+                String model = scanner.nextLine();
+                System.out.println("Please enter the maximum number of passengers:");
+                int maxPassengers = scanner.nextInt();
+                System.out.println("Please enter the maximum speed:");
+                int maxSpeed = scanner.nextInt();
+                System.out.println("Please enter the Fuel Consumption:");
+                int fuelConsumption = scanner.nextInt();
+                System.out.println("Please enter the engine life years:");
+                int engineLife = scanner.nextInt();
+                System.out.println("Please enter number of wheels :");
+                int wheels = scanner.nextInt();
+                System.out.println("Please enter the country flag:");
+                String countryFlag = scanner.next();
+                do {
+                    System.out.println("Please enter the wind direction:");
+                    System.out.println("1 - with the wind");
+                    System.out.println("2 - against the wind");
+                    System.out.println("Please enter your option:");
+                    int windDirection = scanner.nextInt();
+                    if (windDirection == 1) {
+                        vehicle = new Amphibious(model, maxPassengers, maxSpeed, wheels, true,
+                                countryFlag, fuelConsumption, engineLife);
+                    } else if (windDirection == 2) {
+                        vehicle = new Amphibious(model, maxPassengers, maxSpeed, wheels, false,
+                                countryFlag, fuelConsumption, engineLife);
+                    } else {
+                        System.out.println("Invalid option. Please choose again.");
+                    }
+                } while (vehicle == null);
+            }
             default -> System.out.println("Invalid option. Please choose again.");
         }
         return vehicle;
