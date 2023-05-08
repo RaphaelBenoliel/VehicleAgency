@@ -4,7 +4,7 @@ package vehicle;
  * Classes that implement this interface should provide methods to get and set the license type of the vehicle.
  */
 enum licenseType{
-    MINI, LIMIT, UNLIMIT
+    MINI, LIMIT, UNLIMITED
 }
 public interface Commercial {
     /**
