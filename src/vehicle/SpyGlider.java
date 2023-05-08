@@ -5,17 +5,19 @@ import java.util.Objects;
 /**
  * The SpyGlider class represents a military Aerial vehicle, non-motorized for military use and have an energy score.
  */
-public class SpyGlider extends AirTransportation implements noMotorized{
+public class SpyGlider extends Vehicle implements IAirTransportation,noMotorized{
     private String powerSource;
     private EnergyScore energyScore;
+    private String useInfo;
     /**
      * Constructs a SpyGlider object with the given model, maximum number of passengers, maximum speed,
      * and energy score. all data members is by default.
      * @param PowerSource the source of power of the SpyGlider
      */
-    public SpyGlider(String PowerSource)
+    public SpyGlider(String PowerSource, byte[] image)
     {
-        super("privileged", 1, 50, "Military");
+        super("privileged", 1, 50, image);
+        this.useInfo = "military";
         setPowerSource(PowerSource);
         setEnergyScore(EnergyScore.C);
     }
@@ -42,10 +44,9 @@ public class SpyGlider extends AirTransportation implements noMotorized{
 
     @Override
     public String toString(){
-        return this.getClass().getSimpleName() +": "+
-                super.toString() +
-                " It's source power is " + getPowerSource() +
-                " and has a energy score of " + getEnergyScore() + ".";
+        return this.getClass().getSimpleName() + ": " + super.toString() + " It is used for " + useInfo
+                + "." + " It's source power is " + getPowerSource()
+                + " and has a energy score of " + getEnergyScore() + ".";
     }
     @Override
     public boolean equals(Object o) {
@@ -54,9 +55,18 @@ public class SpyGlider extends AirTransportation implements noMotorized{
         if (!super.equals(o)) return false;
 
         SpyGlider spyGlider = (SpyGlider) o;
-
         if (!Objects.equals(powerSource, spyGlider.powerSource))
             return false;
         return energyScore == spyGlider.energyScore;
+    }
+
+    @Override
+    public String getUseInfo() {
+        return this.useInfo;
+    }
+
+    @Override
+    public void setUseInfo(String useInfo) {
+        this.useInfo = useInfo;
     }
 }// End of SpyGlider class

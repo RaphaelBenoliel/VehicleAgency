@@ -2,59 +2,65 @@ package vehicle;
 
 import java.util.Objects;
 
-public class Amphibious extends Vehicle implements ILandTransportation, ISeaTransportation, Motorized{
+public class Amphibious extends Vehicle implements ILandTransportation, ISeaTransportation, Motorized {
 
-    private final LandTransportation landTransportation;
-    private final SeaTransportation seaTransportation;
     private int averageFuelConsumption;
     private int averageEngineLife;
-    public Amphibious(String model,int maxPassengers, int maxSpeed,int wheels, boolean withWindDirection,
-                      String countryFlag, int averageFuelConsumption, int averageEngineLife) {
-        landTransportation = new LandTransportation(model, maxPassengers, maxSpeed, wheels, "road");
-        seaTransportation = new SeaTransportation(model, maxPassengers, maxSpeed, withWindDirection, countryFlag);
+    private boolean withWindDirection;
+    private String countryFlag;
+    private int wheels;
+    private String roadType;
+
+
+    public Amphibious(String model, int maxPassengers, int maxSpeed, int wheels, boolean withWindDirection,
+                      String countryFlag, int averageFuelConsumption, int averageEngineLife, byte[] image) {
+        super(model, maxPassengers, maxSpeed, image);
+        this.wheels = wheels;
+        this.countryFlag = countryFlag;
+        this.withWindDirection = withWindDirection;
+        this.roadType = "road";
         this.averageFuelConsumption = averageFuelConsumption;
         this.averageEngineLife = averageEngineLife;
     }
+
     @Override
     public int getWheels() {
-        return landTransportation.getWheels();
+        return this.wheels;
     }
 
     @Override
     public String getRoadType() {
-        return landTransportation.getRoadType();
+        return this.roadType;
     }
 
     @Override
     public void setWheels(int wheels) {
-        landTransportation.setWheels(wheels);
-
+        this.wheels = wheels;
     }
 
     @Override
     public void setRoadType(String roadType) {
-        landTransportation.setRoadType(roadType);
-
+        this.roadType = roadType;
     }
 
     @Override
     public boolean isWithWindDirection() {
-        return seaTransportation.isWithWindDirection();
+        return this.withWindDirection;
     }
 
     @Override
     public String getCountryFlag() {
-        return seaTransportation.getCountryFlag();
+        return this.countryFlag;
     }
 
     @Override
     public void setWithWindDirection(boolean withWindDirection) {
-        seaTransportation.setWithWindDirection(withWindDirection);
+        this.withWindDirection = withWindDirection;
     }
 
     @Override
     public void setCountryFlag(String countryFlag) {
-        seaTransportation.setCountryFlag(countryFlag);
+        this.countryFlag = countryFlag;
     }
 
     @Override
@@ -79,9 +85,13 @@ public class Amphibious extends Vehicle implements ILandTransportation, ISeaTran
 
     @Override
     public String toString() {
-        return landTransportation.toString() + " It can also move on water. " + seaTransportation.toString() +
-                " It has an average fuel consumption of " + averageFuelConsumption +
-                " liters per 100 km and an average engine life of " + averageEngineLife + " years.";
+        String result = this.getClass().getSimpleName() + ": " + super.toString()
+                + " It has " + wheels + " wheels, can move on " + roadType + "."
+                + " It can also move on water," + " Under " + getCountryFlag() + " flag, ";
+        result += withWindDirection ? "with" : "against";
+        result += " the wind." + " Engine: " + getAverageFuelConsumption() + "L, "
+                + "lifetime of " + getAverageEngineLife() + " years.";
+        return result;
     }
 
     @Override
@@ -94,9 +104,10 @@ public class Amphibious extends Vehicle implements ILandTransportation, ISeaTran
 
         if (averageFuelConsumption != that.averageFuelConsumption) return false;
         if (averageEngineLife != that.averageEngineLife) return false;
-        if (!Objects.equals(landTransportation, that.landTransportation))
-            return false;
-        return Objects.equals(seaTransportation, that.seaTransportation);
+        if (withWindDirection != that.withWindDirection) return false;
+        if (wheels != that.wheels) return false;
+        if (!Objects.equals(countryFlag, that.countryFlag)) return false;
+        return Objects.equals(roadType, that.roadType);
     }
 
 }

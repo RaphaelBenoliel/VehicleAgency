@@ -9,17 +9,19 @@ public abstract class Vehicle {
     protected int distanceTraveled;
     protected int maxPassengers;
     protected int maxSpeed;
+    protected byte[] image;
     /**
      * Constructs a new Vehicle with the given model, maximum number of passengers, and maximum speed.
      * @param model the model of the vehicle
      * @param maxPassengers the maximum number of passengers the vehicle can carry
      * @param maxSpeed the maximum speed of the vehicle
      */
-    public Vehicle(String model, int maxPassengers, int maxSpeed) {
+    public Vehicle(String model, int maxPassengers, int maxSpeed, byte[] image) {
         this.model = model;
         this.distanceTraveled = 0;
         this.maxPassengers = maxPassengers;
         this.maxSpeed = maxSpeed;
+        this.image = image;
     }
 
     protected Vehicle() {
@@ -54,8 +56,8 @@ public abstract class Vehicle {
      */
     @Override
     public String toString() {
-        return "Model: " + this.model + ", Traveled: " + this.distanceTraveled + "KM, Max Speed of " + this.maxSpeed +
-                "Mph, can carry max of " + this.maxPassengers + " people.";
+        return "Model: " + this.getModel() + ", Traveled: " + this.getDistanceTraveled() + "KM, Max Speed of " + this.getMaxSpeed() +
+                "Mph, can carry max of " + this.getMaxPassengers() + " people.";
     }
 
     /**
@@ -73,5 +75,12 @@ public abstract class Vehicle {
         if (maxPassengers != vehicle.maxPassengers) return false;
         if (maxSpeed != vehicle.maxSpeed) return false;
         return Objects.equals(model, vehicle.model);
+    }
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public byte[] getImage() {
+        return image;
     }
 }// End of Vehicle class
