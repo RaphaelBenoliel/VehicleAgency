@@ -37,10 +37,7 @@ public class TestDriveDialog extends JDialog {
                             index = i;
                             setVisible(false);
                         }
-                        else{
-
-                            index = -1;
-                        }
+                        else index = -1;
                     }
                 }
             }
@@ -64,20 +61,18 @@ public class TestDriveDialog extends JDialog {
 
             }
         });
-
     }
 
     public int getIndex() {
         return index;
     }
-    public int showDialog() {
+    public void showDialog() {
         setLocationRelativeTo(getParent());
         setSize(1000,800);
 //        this.pack();
         setLocationRelativeTo(null);
         setResizable(false);
         setVisible(true);
-        return result;
     }
 
 }

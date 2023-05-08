@@ -148,11 +148,33 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
                 resetDistanceTraveled();
                 break;
             case "Change Flags":
-                //changeFlags();
+                changeFlags();
                 break;
             case "Exit":
                 exit();
                 break;
+        }
+    }
+
+    private void changeFlags() {
+        if(agency.length == 0){
+            JOptionPane.showMessageDialog(this, "There are no vehicles in the agency.");
+            return;
+        }
+        FlagDialog flagDialog = new FlagDialog(this);
+        flagDialog.showDialog();
+        int result = flagDialog.getResult();
+        String[] flags = {"Israel", "USA", "Germany", "Italy", "Greece", "Somalia", "Pirate"};
+        boolean flag = false;
+        if (agency != null && result != -1) {
+            for (Vehicle vehicle : agency) {
+                if (vehicle instanceof ISeaTransportation) {
+                    ((ISeaTransportation) vehicle).setCountryFlag(flags[result]);
+                    flag = true;
+                }
+            }
+            if(flag) JOptionPane.showMessageDialog(null, "Flag changed successfully.");
+            else JOptionPane.showMessageDialog(null, "There are no sea vehicles in the agency.");
         }
     }
 
@@ -290,7 +312,7 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
     private Vehicle createVehicle() {
         String[] vehicleTypes = {"Jeep", "Frigate", "Spy Glider", "Game Glider", "Amphibious", "Bicycle", "Cruise Ship"};
         String type = (String) JOptionPane.showInputDialog(this, "Select the type of vehicle to add:",
-                "Add New Vehicle", JOptionPane.QUESTION_MESSAGE, null, vehicleTypes, vehicleTypes[0]);
+                "Add New Vehicle",JOptionPane.QUESTION_MESSAGE, null, vehicleTypes, vehicleTypes[0]);
         if (type == null) {
             JOptionPane.showMessageDialog(this, "Adding a vehicle canceled.");
             return null;
