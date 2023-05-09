@@ -36,7 +36,6 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
                 " add another vehicle?", "Vehicle Agency", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION);
 
         //Create the main panel and add it to the frame
-//        vehiclePanel.setLayout(new GridLayout(4, 4));
         JPanel optionPanel = new JPanel();
         optionPanel.setLayout(new BoxLayout(optionPanel, BoxLayout.LINE_AXIS));
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
@@ -83,7 +82,7 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
         // Set the properties of the frame
         setTitle("Vehicle Agency");
         setSize(1000, 800);
-        setResizable(false);
+//        setResizable(false);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);

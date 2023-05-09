@@ -8,7 +8,7 @@ import java.awt.event.MouseListener;
 public class FlagDialog extends JDialog {
     private int result = -1;
     public FlagDialog(JFrame window) {
-        super(window, "Flag a vehicle", true);
+        super(window, "Changing all vessels flags", true);
 
         JButton buttonExit = new JButton("Return to Menu");
         this.add(buttonExit, BorderLayout.SOUTH);
@@ -52,12 +52,10 @@ public class FlagDialog extends JDialog {
                         if (option == JOptionPane.YES_OPTION) {
                             setVisible(false);
                             result = i;
-
                         }
                         else result = -1;
                     }
                 }
-
             }
 
             @Override
@@ -89,7 +87,7 @@ public class FlagDialog extends JDialog {
         setLocationRelativeTo(getParent());
         setSize(1000,820);
         setLocationRelativeTo(null);
-        setResizable(false);
+//        setResizable(false);
         setVisible(true);
     }
 

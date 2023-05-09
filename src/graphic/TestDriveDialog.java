@@ -71,9 +71,7 @@ public class TestDriveDialog extends JDialog {
         setSize(1000,800);
 //        this.pack();
         setLocationRelativeTo(null);
-        setResizable(false);
+//        setResizable(false);
         setVisible(true);
     }
-
 }
-
