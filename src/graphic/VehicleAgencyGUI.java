@@ -14,7 +14,6 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
     private Vehicle[] agency;
     private Popup popup;
     JPanel vehiclePanel;
-
     JPanel mainPanel ;
     static int serialNum = 0;
     public VehicleAgencyGUI() {
@@ -36,7 +35,6 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
         } while (agency == null || JOptionPane.showConfirmDialog(null, "Would you like to" +
                 " add another vehicle?", "Vehicle Agency", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION);
 
-
         //Create the main panel and add it to the frame
 //        vehiclePanel.setLayout(new GridLayout(4, 4));
         JPanel optionPanel = new JPanel();
@@ -44,18 +42,14 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
         // Add the components to the main panel
         JLabel titleLabel = new JLabel("Welcome to Vehicle Agency");
-//        titleLabel.setBackground(new Color(82, 86, 88));
         titleLabel.setFont(new Font("Arial", Font.BOLD, 30));
-//        titleLabel.setForeground(Color.WHITE);
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-
 
         mainPanel.add(titleLabel);
         mainPanel.add(vehiclePanel);
         mainPanel.add(optionPanel);
-
         add(mainPanel);
+
         //Mouse pressed event for vehicle panel
         mainPanel.addMouseListener(this);
 
@@ -67,33 +61,26 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
         optionPanel.add(addVehicleButton, BorderLayout.SOUTH);
 
         JButton buyVehicleButton = new JButton("Buy a Vehicle");
-
         buyVehicleButton.addActionListener(this);
         optionPanel.add(buyVehicleButton);
 
         JButton testDriveButton = new JButton("Test Drive a Vehicle");
-
         testDriveButton.addActionListener(this);
         optionPanel.add(testDriveButton, BorderLayout.SOUTH);
 
         JButton resetKilometerButton = new JButton("Reset Distance Traveled");
-
         resetKilometerButton.addActionListener(this);
         optionPanel.add(resetKilometerButton, BorderLayout.SOUTH);
 
         JButton changeFlagsButton = new JButton("Change Flags");
-
         changeFlagsButton.addActionListener(this);
         optionPanel.add(changeFlagsButton, BorderLayout.SOUTH);
 
         JButton exitButton = new JButton("Exit");
-
         exitButton.addActionListener(this);
         optionPanel.add(exitButton, BorderLayout.SOUTH);
 
         // Set the properties of the frame
-//        this.pack();
-
         setTitle("Vehicle Agency");
         setSize(1000, 800);
         setResizable(false);
@@ -115,6 +102,18 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
         vehiclePanel.revalidate();
     }
 
+    private JPanel setPanelFromAgency() {
+        JPanel newPanel = new JPanel();
+        newPanel.setLayout(new GridLayout(4, 4));
+        for (int i = 0; i < vehiclePanel.getComponentCount(); i++) {
+            newPanel.add(new JLabel(new ImageIcon(agency[i].getImage())));
+            newPanel.getComponent(i).setName(vehiclePanel.getComponent(i).getName());
+        }
+        newPanel.revalidate();
+        newPanel.repaint();
+        return newPanel;
+    }
+
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
         switch (command) {
@@ -125,18 +124,13 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
                 else {
                     agency = addVehicle(agency, temp);
                     JOptionPane.showMessageDialog(this, "Vehicle added successfully.");
-//                    vehiclePanel.add(new JLabel(new ImageIcon(temp.getImage())));
-
                     ImageIcon vehicleImg = new ImageIcon(temp.getImage());
                     JLabel vehicleLabel = new JLabel(vehicleImg);
                     serialNum++;
                     vehicleLabel.setName("L: " + serialNum);
                     vehiclePanel.add(vehicleLabel);
-
                     vehiclePanel.revalidate();
                     vehiclePanel.repaint();
-//                    this.pack();
-//                    mainPanel.revalidate();
                 }
             }
             case "Buy a Vehicle" -> buyVehicle();
@@ -147,6 +141,65 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
         }
     }
 
+    private void buyVehicle() {
+        if(agency.length == 0){
+            JOptionPane.showMessageDialog(this, "There are no vehicles to buy.");
+            return;
+        }
+        JPanel buyPanel= setPanelFromAgency();
+        BuyingDialog b = new BuyingDialog(this, buyPanel);
+        b.showDialog();
+        int x;
+        if (buyPanel.getComponentCount() != vehiclePanel.getComponentCount()) {
+            for (int i = vehiclePanel.getComponentCount() - 1; i >= 0; i--) {
+                x = 0;
+                for (int j = 0; j < buyPanel.getComponentCount(); j++) {
+                    if (vehiclePanel.getComponent(i).getName().equals(buyPanel.getComponent(j).getName())) {
+                        x++;
+                    }
+                }
+                if (x == 0) {
+                    vehiclePanel.remove(i);
+                    agency = removeVehicle(agency, i);
+                    System.out.println("Vehicle " + i + " removed");
+                }
+            }
+        }
+        vehiclePanel.repaint();
+        vehiclePanel.revalidate();
+    }
+    private void testDriveVehicle() {
+        if(agency.length == 0){
+            JOptionPane.showMessageDialog(this, "There are no vehicles in the agency.");
+            return;
+        }
+        JPanel testPanel = setPanelFromAgency();
+        TestDriveDialog testDialog = new TestDriveDialog(this, testPanel);
+        testDialog.showDialog();
+
+        int index = testDialog.getIndex();
+        if (index != -1) {
+            testPanel.setVisible(true);
+            int distance = Integer.parseInt(JOptionPane.showInputDialog(this, "Please enter the distance you would like to drive."));
+            agency[index].move(distance);
+            JOptionPane.showMessageDialog(this, "Vehicle " + agency[index].getModel() + " has been driven " + agency[index].getDistanceTraveled() + " km.");
+            testPanel.setVisible(false);
+        }
+    }
+
+    private void resetDistanceTraveled() {
+        if(agency.length == 0){
+            JOptionPane.showMessageDialog(this, "There are no vehicles in the agency.");
+            return;
+        }
+        int option = JOptionPane.showConfirmDialog(this, "Are you sure you want to reset the distance traveled of all vehicles?", "Reset Distance Traveled", JOptionPane.YES_NO_OPTION);
+        if (option == JOptionPane.YES_OPTION) {
+            for (Vehicle vehicle : agency) {
+                vehicle.setDistanceTraveled(0);
+            }
+            JOptionPane.showMessageDialog(this, "Distance traveled of all vehicles has been reset.");
+        }
+    }
     private void changeFlags() {
         if(agency.length == 0){
             JOptionPane.showMessageDialog(this, "There are no vehicles in the agency.");
@@ -164,87 +217,10 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
                     flag = true;
                 }
             }
-            if(flag) JOptionPane.showMessageDialog(null, "Flag changed successfully.");
+            if(flag) JOptionPane.showMessageDialog(null, "All Flags changed successfully.");
             else JOptionPane.showMessageDialog(null, "There are no sea vehicles in the agency.");
         }
     }
-
-    private void resetDistanceTraveled() {
-        if(agency.length == 0){
-            JOptionPane.showMessageDialog(this, "There are no vehicles in the agency.");
-            return;
-        }
-        int option = JOptionPane.showConfirmDialog(this, "Are you sure you want to reset the distance traveled of all vehicles?", "Reset Distance Traveled", JOptionPane.YES_NO_OPTION);
-        if (option == JOptionPane.YES_OPTION) {
-            for (Vehicle vehicle : agency) {
-                vehicle.setDistanceTraveled(0);
-            }
-            JOptionPane.showMessageDialog(this, "Distance traveled of all vehicles has been reset.");
-        }
-    }
-
-    private void testDriveVehicle() {
-        if(agency.length == 0){
-            JOptionPane.showMessageDialog(this, "There are no vehicles in the agency.");
-            return;
-        }
-        JPanel tempPanel = new JPanel();
-        tempPanel.setLayout(new GridLayout(4, 4));
-        for (int i = 0; i < vehiclePanel.getComponentCount(); i++) {
-            tempPanel.add(new JLabel(new ImageIcon(agency[i].getImage())));
-            tempPanel.getComponent(i).setName(vehiclePanel.getComponent(i).getName());
-        }
-        tempPanel.revalidate();
-        tempPanel.repaint();
-        TestDriveDialog t = new TestDriveDialog(this, tempPanel);
-        t.showDialog();
-
-        int index = t.getIndex();
-        if (index != -1) {
-            tempPanel.setVisible(true);
-            int distance = Integer.parseInt(JOptionPane.showInputDialog(this, "Please enter the distance you would like to drive."));
-            agency[index].move(distance);
-            JOptionPane.showMessageDialog(this, "Vehicle " + agency[index].getModel() + " has been driven " + agency[index].getDistanceTraveled() + " km.");
-            tempPanel.setVisible(false);
-        }
-
-    }
-
-    private void buyVehicle() {
-        if(agency.length == 0){
-            JOptionPane.showMessageDialog(this, "There are no vehicles to buy.");
-            return;
-        }
-        JPanel tempPanel = new JPanel();
-        tempPanel.setLayout(new GridLayout(4, 4));
-        for (int i = 0; i < vehiclePanel.getComponentCount(); i++) {
-            tempPanel.add(new JLabel(new ImageIcon(agency[i].getImage())));
-            tempPanel.getComponent(i).setName(vehiclePanel.getComponent(i).getName());
-        }
-        tempPanel.revalidate();
-        tempPanel.repaint();
-        BuyingDialog b = new BuyingDialog(this, tempPanel);
-        b.showDialog();
-        int x;
-        if (tempPanel.getComponentCount() != vehiclePanel.getComponentCount()) {
-            for (int i = vehiclePanel.getComponentCount() - 1; i >= 0; i--) {
-                x = 0;
-                for (int j = 0; j < tempPanel.getComponentCount(); j++) {
-                    if (vehiclePanel.getComponent(i).getName().equals(tempPanel.getComponent(j).getName())) {
-                        x++;
-                    }
-                }
-                if (x == 0) {
-                    vehiclePanel.remove(i);
-                    agency = removeVehicle(agency, i);
-                    System.out.println("Vehicle " + i + " removed");
-                }
-            }
-        }
-        vehiclePanel.repaint();
-        vehiclePanel.revalidate();
-    }
-
     private void exit() {
         int option = JOptionPane.showConfirmDialog(this, "Are you sure you want to exit?", "Exit", JOptionPane.YES_NO_OPTION);
         if (option == JOptionPane.YES_OPTION) System.exit(0);
@@ -366,6 +342,7 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
         }
         return img;
     }
+
     private Vehicle[] removeVehicle(Vehicle[] agency, int index) {
         Vehicle[] temp = new Vehicle[agency.length - 1];
         int j = 0;
@@ -403,7 +380,6 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
             if (x >= vehiclePanel.getComponent(i).getX() && x <= vehiclePanel.getComponent(i).getX() + vehiclePanel.getComponent(i).getWidth() &&
                     y >= vehiclePanel.getComponent(i).getY() && y <= vehiclePanel.getComponent(i).getY() + vehiclePanel.getComponent(i).getHeight()) {
                 System.out.println("Vehicle " + i + " clicked");
-//                JOptionPane.showMessageDialog(this, agency[i].toString(), "Vehicle Info", JOptionPane.INFORMATION_MESSAGE);
                 if(popup != null) popup.hide();
                 JLabel label = new JLabel();
                 label.setText(agency[i].toString());
@@ -423,4 +399,3 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
     public void mouseExited(MouseEvent e) {
     }
 }
-
