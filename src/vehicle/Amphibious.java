@@ -2,6 +2,10 @@ package vehicle;
 
 import java.util.Objects;
 
+/**
+ * The Amphibious class represents a vehicle that can move on land and sea.
+ * It extends the Vehicle class and implements the ISeaTransportation and Motorized interface.
+ */
 public class Amphibious extends Vehicle implements ILandTransportation, ISeaTransportation, Motorized {
 
     private int averageFuelConsumption;
@@ -11,7 +15,18 @@ public class Amphibious extends Vehicle implements ILandTransportation, ISeaTran
     private int wheels;
     private String roadType;
 
-
+    /**
+     * Constructs a new Amphibious object.
+     * @param model a String representing the model of the amphibious.
+     * @param maxPassengers an integer representing the maximum number of passengers the amphibious can carry.
+     * @param maxSpeed an integer representing the maximum speed of the amphibious in kilometers per hour.
+     * @param wheels an integer representing the number of wheels the amphibious has.
+     * @param withWindDirection a boolean representing whether the amphibious can move with the wind or against it.
+     * @param countryFlag a String representing the country flag of the amphibious.
+     * @param averageFuelConsumption an integer representing the average fuel consumption of the amphibious.
+     * @param averageEngineLife an integer representing the average engine life of the amphibious.
+     * @param image a byte array representing the image of the amphibious.
+     */
     public Amphibious(String model, int maxPassengers, int maxSpeed, int wheels, boolean withWindDirection,
                       String countryFlag, int averageFuelConsumption, int averageEngineLife, byte[] image) {
         super(model, maxPassengers, maxSpeed, image);
@@ -83,6 +98,10 @@ public class Amphibious extends Vehicle implements ILandTransportation, ISeaTran
         return averageEngineLife;
     }
 
+    /**
+     * A toString method to represent the Amphibious object.
+     * @return a string representation of the Amphibious object.
+     */
     @Override
     public String toString() {
         String result = this.getClass().getSimpleName() + ": " + super.toString()
@@ -93,7 +112,11 @@ public class Amphibious extends Vehicle implements ILandTransportation, ISeaTran
                 + "lifetime of " + getAverageEngineLife() + " years.";
         return result;
     }
-
+    /**
+     * A method to check if two Amphibious objects are equal.
+     * @param o an object to compare with.
+     * @return true if the objects are equal, false otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -101,7 +124,6 @@ public class Amphibious extends Vehicle implements ILandTransportation, ISeaTran
         if (!super.equals(o)) return false;
 
         Amphibious that = (Amphibious) o;
-
         if (averageFuelConsumption != that.averageFuelConsumption) return false;
         if (averageEngineLife != that.averageEngineLife) return false;
         if (withWindDirection != that.withWindDirection) return false;

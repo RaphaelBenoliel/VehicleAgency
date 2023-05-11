@@ -1,5 +1,7 @@
 package vehicle;
-
+/**
+ * The ILandTransportation interface represents a land transportation vehicle.
+ */
 public interface ILandTransportation {
     public int getWheels() ;
 

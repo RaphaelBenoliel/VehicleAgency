@@ -1,7 +1,7 @@
 package vehicle;
 /**
  * The Frigate class represents a frigate vessel.
- * It extends the SeaTransportation class and implements the Motorized interface.
+ * It extends the Vehicle class and implements the ISeaTransportation and Motorized interface.
  */
 public class Frigate extends Vehicle implements ISeaTransportation, Motorized {
     private int averageFuelConsumption;

@@ -66,11 +66,9 @@ public class BuyingDialog extends JDialog {
     }
 
     public void showDialog() {
-        setLocationRelativeTo(getParent());
-        setSize(1000,800);
-//        this.pack();
-        setLocationRelativeTo(null);
-//        setResizable(false);
+        setSize(1000, 800);
+        setMinimumSize(new Dimension(1000, 800));
+        setLocation(250, 80);
         setVisible(true);
     }
 }

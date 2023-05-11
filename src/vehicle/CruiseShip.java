@@ -1,7 +1,11 @@
 package vehicle;
 
 import java.util.Objects;
-
+/**
+ * Represents a type of vehicle that is designed for sea transportation.
+ * Inherits from the abstract Vehicle class and adds fields for average fuel consumption and average engine life.
+ * Implements the ISeaTransportation, Motorized, and Commercial interfaces.
+ */
 public class CruiseShip extends Vehicle implements ISeaTransportation,Motorized,Commercial{
     private int averageFuelConsumption;
     private int averageEngineLife;
@@ -9,13 +13,24 @@ public class CruiseShip extends Vehicle implements ISeaTransportation,Motorized,
     private String countryFlag;
     private licenseType licenseType;
 
+    /**
+     * Constructs a new CruiseShip object.
+     * @param model a String representing the model of the cruise ship.
+     * @param maxPassengers an integer representing the maximum number of passengers the cruise ship can carry.
+     * @param maxSpeed an integer representing the maximum speed of the cruise ship in kilometers per hour.
+     * @param countryFlag a String representing the country flag of the cruise ship.
+     * @param image a byte array representing the image of the cruise ship.
+     */
     public CruiseShip(String model, int maxPassengers, int maxSpeed, String countryFlag, byte[] image){
         super(model, maxPassengers, maxSpeed, image);
         this.countryFlag = countryFlag;
         this.withWindDirection = true;
         this.licenseType = vehicle.licenseType.UNLIMITED;
     }
-
+    /**
+     * Returns A toString method to represent the CruiseShip object.
+     * @return a String representation of this CruiseShip object.
+     */
     @Override
     public String toString(){
         String result =  this.getClass().getSimpleName() +": " + super.toString() + " Under " + countryFlag + " flag, ";
@@ -26,6 +41,11 @@ public class CruiseShip extends Vehicle implements ISeaTransportation,Motorized,
                 + "lifetime of " + getAverageEngineLife() + " years.";
     }
 
+    /**
+     * Returns a boolean value indicating whether the given object is equal to this CruiseShip object.
+     * @param o an Object.
+     * @return true if the given object is equal to this CruiseShip object, false otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

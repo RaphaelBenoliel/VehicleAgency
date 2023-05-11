@@ -17,6 +17,7 @@ public class FlagDialog extends JDialog {
         panel.setLayout(new GridLayout(4,2));
         JLabel israelFlag = new JLabel(new ImageIcon("src/imgSource/israel.png"));
         israelFlag.setName("Israel");
+
         JLabel usaFlag = new JLabel(new ImageIcon("src/imgSource/USA.png"));
         usaFlag.setName("USA");
         JLabel germanyFlag = new JLabel(new ImageIcon("src/imgSource/germany.png"));
@@ -84,10 +85,9 @@ public class FlagDialog extends JDialog {
         return result;
     }
     public void showDialog(){
-        setLocationRelativeTo(getParent());
         setSize(1000,820);
-        setLocationRelativeTo(null);
-//        setResizable(false);
+        setMinimumSize(new Dimension(1000, 800));
+        setLocation(250, 80);
         setVisible(true);
     }
 

@@ -82,7 +82,7 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
         // Set the properties of the frame
         setTitle("Vehicle Agency");
         setSize(1000, 800);
-//        setResizable(false);
+        setMinimumSize(new Dimension(1000, 800));
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
@@ -93,19 +93,21 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
         vehiclePanel.setLayout(new GridLayout(4, 4));
         for (Vehicle vehicle : agency) {
             ImageIcon vehicleImg = new ImageIcon(vehicle.getImage());
-            JLabel vehicleLabel = new JLabel(vehicleImg);
+            JLabel vehicleLabel = new JLabel(new ImageIcon(vehicleImg.getImage().getScaledInstance(150,150,Image.SCALE_DEFAULT)));
             serialNum++;
             vehicleLabel.setName("L: " + serialNum);
             vehiclePanel.add(vehicleLabel);
         }
         vehiclePanel.revalidate();
     }
-
     private JPanel setPanelFromAgency() {
         JPanel newPanel = new JPanel();
         newPanel.setLayout(new GridLayout(4, 4));
         for (int i = 0; i < vehiclePanel.getComponentCount(); i++) {
-            newPanel.add(new JLabel(new ImageIcon(agency[i].getImage())));
+            ImageIcon vehicleImg = new ImageIcon(agency[i].getImage());
+            JLabel vehicleLabel = new JLabel(new ImageIcon(vehicleImg.getImage().getScaledInstance(150,150,Image.SCALE_DEFAULT)));
+            newPanel.add(vehicleLabel);
+//            newPanel.add(new JLabel(new ImageIcon(agency[i].getImage())));
             newPanel.getComponent(i).setName(vehiclePanel.getComponent(i).getName());
         }
         newPanel.revalidate();
@@ -124,7 +126,7 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
                     agency = addVehicle(agency, temp);
                     JOptionPane.showMessageDialog(this, "Vehicle added successfully.");
                     ImageIcon vehicleImg = new ImageIcon(temp.getImage());
-                    JLabel vehicleLabel = new JLabel(vehicleImg);
+                    JLabel vehicleLabel = new JLabel(new ImageIcon(vehicleImg.getImage().getScaledInstance(150,150,Image.SCALE_DEFAULT)));
                     serialNum++;
                     vehicleLabel.setName("L: " + serialNum);
                     vehiclePanel.add(vehicleLabel);
