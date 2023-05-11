@@ -6,6 +6,9 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+/**
+ * The TestDriveDialog class represents a dialog for test-driving a vehicle.
+ */
 public class TestDriveDialog extends JDialog {
 
     private int result = -1;

@@ -44,7 +44,7 @@ public class GameGlider extends Vehicle implements IAirTransportation, noMotoriz
     public EnergyScore getEnergyScore() { return energyScore; }
 
     /**
-     *  toString method to represent a GameGlider object.
+     * toString method to represent a GameGlider object.
      * @return a string representation of the GameGlider object.
      */
     @Override

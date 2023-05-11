@@ -43,12 +43,22 @@ public class SpyGlider extends Vehicle implements IAirTransportation,noMotorized
         return energyScore;
     }
 
+    /**
+     * toString method to represent a SpyGlider object.
+     * @return a string representation of the SpyGlider object
+     */
     @Override
     public String toString(){
         return this.getClass().getSimpleName() + ": " + super.toString() + " It is used for " + useInfo
                 + "." + " It's source power is " + getPowerSource()
                 + " and has a energy score of " + getEnergyScore() + ".";
     }
+
+    /**
+     * Compares this SpyGlider to the specified object. The result is true if and only if the argument is not null
+     * @param o the object to compare to this one
+     * @return true if the objects are equal, false otherwise
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

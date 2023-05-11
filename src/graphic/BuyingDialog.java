@@ -5,6 +5,9 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+/**
+ * The BuyingDialog class represents a dialog for buying a vehicle.
+ */
 public class BuyingDialog extends JDialog {
 
     private int result = -1;

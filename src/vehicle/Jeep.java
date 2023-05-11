@@ -1,8 +1,6 @@
 package vehicle;
 
 import javax.swing.*;
-import java.awt.*;
-
 /**
  * The Jeep class is a Land Transportation vehicle motorized for commercial use.
  */
@@ -46,6 +44,10 @@ public class Jeep extends Vehicle implements ILandTransportation,Motorized,Comme
     @Override
     public int getAverageEngineLife() { return averageEngineLife; }
 
+    /**
+     * toString method to represent a Jeep object.
+     * @return a String representation of the Jeep object.
+     */
     @Override
     public String toString(){
         return this.getClass().getSimpleName() + ": " +
@@ -54,6 +56,12 @@ public class Jeep extends Vehicle implements ILandTransportation,Motorized,Comme
                 + "\nEngine: " + getAverageFuelConsumption() + "L, "
                 + "lifetime of " + getAverageEngineLife() + " years.";
     }
+
+    /**
+     * Compares this Jeep object to another object for equality.
+     * @param o the object to compare to this one
+     * @return true if the objects are equal, false otherwise
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -8,7 +8,9 @@ import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-
+/**
+ * The VehicleAgencyGUI class represents a GUI for a vehicle agency.
+ */
 public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseListener {
 
     private Vehicle[] agency;
@@ -16,6 +18,9 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
     JPanel vehiclePanel;
     JPanel mainPanel ;
     static int serialNum = 0;
+    /**
+     * Constructs a new VehicleAgencyGUI object.
+     */
     public VehicleAgencyGUI() {
         initMainPanel();
     }
@@ -88,6 +93,7 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
         setVisible(true);
     }
 
+
     private void initVehiclePanel(JPanel vehiclePanel) {
 
         vehiclePanel.setLayout(new GridLayout(4, 4));
@@ -140,6 +146,9 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
         }
     }
 
+    /**
+     * this method bought a vehicle from the agency and remove them from the agency and the panel.
+     */
     private void buyVehicle() {
         if(agency.length == 0){
             JOptionPane.showMessageDialog(this, "There are no vehicles to buy.");
@@ -167,6 +176,9 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
         vehiclePanel.repaint();
         vehiclePanel.revalidate();
     }
+
+    /** A Method to test drive a vehicle and update its distance traveled.
+     */
     private void testDriveVehicle() {
         if(agency.length == 0){
             JOptionPane.showMessageDialog(this, "There are no vehicles in the agency.");
@@ -186,6 +198,8 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
         }
     }
 
+    /** This method resets the distance traveled of all vehicles in the agency.
+     */
     private void resetDistanceTraveled() {
         if(agency.length == 0){
             JOptionPane.showMessageDialog(this, "There are no vehicles in the agency.");
@@ -199,6 +213,10 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
             JOptionPane.showMessageDialog(this, "Distance traveled of all vehicles has been reset.");
         }
     }
+
+    /**
+     * This method changes the flags of all sea vehicles in the agency.
+     */
     private void changeFlags() {
         if(agency.length == 0){
             JOptionPane.showMessageDialog(this, "There are no vehicles in the agency.");
@@ -225,6 +243,10 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
         if (option == JOptionPane.YES_OPTION) System.exit(0);
     }
 
+    /**
+     * Creates a new vehicle according to the user's choice.
+     * @return the new vehicle.
+     */
     private Vehicle createVehicle() {
         String[] vehicleTypes = {"Jeep", "Frigate", "Spy Glider", "Game Glider", "Amphibious", "Bicycle", "Cruise Ship"};
         String type = (String) JOptionPane.showInputDialog(this, "Select the type of vehicle to add:",
@@ -309,6 +331,11 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
         return new Jeep(model, maxSpeed, fuelConsumption, engineLife, img);
     }
 
+    /**
+     * Create the wind direction panel and add the radio buttons
+     * @return true if the user selected "With the wind direction" or
+     * false if the user selected "Against the wind direction"
+     */
     private boolean isWindDirectionRadio() {
         JPanel windPanel = new JPanel();
         windPanel.setLayout(new BoxLayout(windPanel, BoxLayout.PAGE_AXIS));
@@ -324,7 +351,10 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
         // Get the selected wind direction and create the Frigate object
         return withWindButton.isSelected();
     }
-
+    /**
+     * Get an image from the user
+     * @return an ImageIcon with the image selected by the user resized to 175x160
+     */
     private ImageIcon getImageFromUser() {
         JFileChooser fileChooser = new JFileChooser();
         JOptionPane.showMessageDialog(this, "Select an image file", "Select Image", JOptionPane.INFORMATION_MESSAGE);
@@ -342,6 +372,13 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
         imageIcon.setImage(imageIcon.getImage().getScaledInstance(175, 160, Image.SCALE_DEFAULT));
         return imageIcon;
     }
+
+    /**
+     * Remove a vehicle from the agency
+     * @param agency The agency from which the vehicle will be removed
+     * @param index The index of the vehicle to be removed
+     * @return a new Vehicle[] agency without the vehicle removed.
+     */
     private Vehicle[] removeVehicle(Vehicle[] agency, int index) {
         Vehicle[] temp = new Vehicle[agency.length - 1];
         int j = 0;
@@ -355,6 +392,12 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
         return agency;
     }
 
+    /**
+     * Add a vehicle to the agency
+     * @param agency The agency to which the vehicle will be added
+     * @param vehicle The vehicle to be added
+     * @return a new Vehicle[] agency with the vehicle added.
+     */
     private Vehicle[] addVehicle(Vehicle[] agency, Vehicle vehicle) {
         if (agency == null) {
             agency = new Vehicle[1];
