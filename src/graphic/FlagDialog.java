@@ -10,6 +10,7 @@ import java.awt.event.MouseListener;
  */
 public class FlagDialog extends JDialog {
     private int result = -1;
+
     public FlagDialog(JFrame window) {
         super(window, "Changing all vessels flags", true);
 
@@ -62,37 +63,21 @@ public class FlagDialog extends JDialog {
                     }
                 }
             }
-
             @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
+            public void mousePressed(MouseEvent e) {}
             @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
+            public void mouseReleased(MouseEvent e) {}
             @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
+            public void mouseEntered(MouseEvent e) {}
             @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
+            public void mouseExited(MouseEvent e) {}
         });
-
     }
-    public int getResult(){
-        return result;
-    }
+    public int getResult(){ return result; }
     public void showDialog(){
         setSize(1000,820);
         setMinimumSize(new Dimension(1000, 800));
         setLocation(250, 80);
         setVisible(true);
     }
-
 }

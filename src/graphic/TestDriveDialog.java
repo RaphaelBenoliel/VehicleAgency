@@ -16,7 +16,6 @@ public class TestDriveDialog extends JDialog {
 
     public TestDriveDialog(Frame window, JPanel panel) {
         super(window, "Test Drive a vehicle", true);
-
         add(panel);
         JButton buttonExit = new JButton("Return to Menu");
         buttonExit.addActionListener(e -> {
@@ -46,24 +45,13 @@ public class TestDriveDialog extends JDialog {
                 }
             }
             @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
+            public void mousePressed(MouseEvent e) {}
             @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
+            public void mouseReleased(MouseEvent e) {}
             @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
+            public void mouseEntered(MouseEvent e) {}
             @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
+            public void mouseExited(MouseEvent e) {}
         });
     }
 
