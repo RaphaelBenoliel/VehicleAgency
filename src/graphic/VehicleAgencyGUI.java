@@ -224,7 +224,9 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
             JOptionPane.showMessageDialog(this, "There are no vehicles in the agency.");
             return;
         }
-        int option = JOptionPane.showConfirmDialog(this, "Are you sure you want to reset the distance traveled of all vehicles?", "Reset Distance Traveled", JOptionPane.YES_NO_OPTION);
+        int option = JOptionPane.showConfirmDialog(this,
+                "Are you sure you want to reset the distance traveled of all vehicles?",
+                "Reset Distance Traveled", JOptionPane.YES_NO_OPTION);
         if (option == JOptionPane.YES_OPTION) {
             for (Vehicle vehicle : agency) {
                 vehicle.setDistanceTraveled(0);
@@ -258,7 +260,8 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
         }
     }
     private void exit() {
-        int option = JOptionPane.showConfirmDialog(this, "Are you sure you want to exit?", "Exit", JOptionPane.YES_NO_OPTION);
+        int option = JOptionPane.showConfirmDialog(this,
+                "Are you sure you want to exit?", "Exit", JOptionPane.YES_NO_OPTION);
         if (option == JOptionPane.YES_OPTION) System.exit(0);
     }
 
@@ -392,7 +395,8 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
         byte[] img = null;
         do {
             if (result == JFileChooser.CANCEL_OPTION) {
-                JOptionPane.showMessageDialog(this, "You must select an image file", "Select Image", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this,
+                        "You must select an image file", "Select Image", JOptionPane.ERROR_MESSAGE);
                 result = fileChooser.showOpenDialog(this);
             }
         } while (result == JFileChooser.CANCEL_OPTION);
