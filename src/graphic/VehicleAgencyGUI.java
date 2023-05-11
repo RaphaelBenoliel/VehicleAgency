@@ -419,6 +419,7 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
         int x = e.getX();
         int y = e.getY();
         for (int i = 0; i < vehiclePanel.getComponentCount(); i++) {
+            // Check if the mouse click is inside the vehicle panel
             if (x >= vehiclePanel.getComponent(i).getX() && x <= vehiclePanel.getComponent(i).getX() + vehiclePanel.getComponent(i).getWidth() &&
                     y >= vehiclePanel.getComponent(i).getY() && y <= vehiclePanel.getComponent(i).getY() + vehiclePanel.getComponent(i).getHeight()) {
                 System.out.println("Vehicle " + i + " clicked");

@@ -48,6 +48,7 @@ public class FlagDialog extends JDialog {
                 int x = e.getX();
                 int y = e.getY();
                 for (int i = 0; i < panel.getComponentCount(); i++) {
+                    // check if the mouse click is inside the bounds of the vehicle image.
                     if (x >= panel.getComponent(i).getX() && x <= panel.getComponent(i).getX() + panel.getComponent(i).getWidth() &&
                             y >= panel.getComponent(i).getY() && y <= panel.getComponent(i).getY() + panel.getComponent(i).getHeight()) {
                         System.out.println("flag " + panel.getComponent(i).getName() + " clicked");
