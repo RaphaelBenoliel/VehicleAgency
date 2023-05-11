@@ -1,5 +1,6 @@
 package vehicle;
 
+import javax.swing.*;
 import java.util.Objects;
 
 /**
@@ -28,7 +29,7 @@ public class Amphibious extends Vehicle implements ILandTransportation, ISeaTran
      * @param image a byte array representing the image of the amphibious.
      */
     public Amphibious(String model, int maxPassengers, int maxSpeed, int wheels, boolean withWindDirection,
-                      String countryFlag, int averageFuelConsumption, int averageEngineLife, byte[] image) {
+                      String countryFlag, int averageFuelConsumption, int averageEngineLife, ImageIcon image) {
         super(model, maxPassengers, maxSpeed, image);
         this.wheels = wheels;
         this.countryFlag = countryFlag;

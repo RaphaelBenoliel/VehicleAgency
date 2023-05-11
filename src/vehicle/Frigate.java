@@ -1,4 +1,7 @@
 package vehicle;
+
+import javax.swing.*;
+
 /**
  * The Frigate class represents a frigate vessel.
  * It extends the Vehicle class and implements the ISeaTransportation and Motorized interface.
@@ -15,7 +18,7 @@ public class Frigate extends Vehicle implements ISeaTransportation, Motorized {
      * @param maxSpeed an integer representing the maximum speed of the frigate in kilometers per hour.
      * @param withWindDirection a boolean representing whether the frigate can move with the wind or against it.
      */
-    public Frigate(String model, int maxPassengers, int maxSpeed, boolean withWindDirection, byte[] image) {
+    public Frigate(String model, int maxPassengers, int maxSpeed, boolean withWindDirection, ImageIcon image) {
         super(model, maxPassengers, maxSpeed, image);
         setWithWindDirection(withWindDirection);
         setCountryFlag("Israel");

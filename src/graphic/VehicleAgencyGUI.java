@@ -92,8 +92,7 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
 
         vehiclePanel.setLayout(new GridLayout(4, 4));
         for (Vehicle vehicle : agency) {
-            ImageIcon vehicleImg = new ImageIcon(vehicle.getImage());
-            JLabel vehicleLabel = new JLabel(new ImageIcon(vehicleImg.getImage().getScaledInstance(150,150,Image.SCALE_DEFAULT)));
+            JLabel vehicleLabel = new JLabel(new ImageIcon(vehicle.getImage().getImage()));
             serialNum++;
             vehicleLabel.setName("L: " + serialNum);
             vehiclePanel.add(vehicleLabel);
@@ -104,8 +103,7 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
         JPanel newPanel = new JPanel();
         newPanel.setLayout(new GridLayout(4, 4));
         for (int i = 0; i < vehiclePanel.getComponentCount(); i++) {
-            ImageIcon vehicleImg = new ImageIcon(agency[i].getImage());
-            JLabel vehicleLabel = new JLabel(new ImageIcon(vehicleImg.getImage().getScaledInstance(150,150,Image.SCALE_DEFAULT)));
+            JLabel vehicleLabel = new JLabel(new ImageIcon(agency[i].getImage().getImage()));
             newPanel.add(vehicleLabel);
 //            newPanel.add(new JLabel(new ImageIcon(agency[i].getImage())));
             newPanel.getComponent(i).setName(vehiclePanel.getComponent(i).getName());
@@ -125,8 +123,8 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
                 else {
                     agency = addVehicle(agency, temp);
                     JOptionPane.showMessageDialog(this, "Vehicle added successfully.");
-                    ImageIcon vehicleImg = new ImageIcon(temp.getImage());
-                    JLabel vehicleLabel = new JLabel(new ImageIcon(vehicleImg.getImage().getScaledInstance(150,150,Image.SCALE_DEFAULT)));
+                    ImageIcon vehicleImg = new ImageIcon(temp.getImage().getImage());
+                    JLabel vehicleLabel = new JLabel(vehicleImg);
                     serialNum++;
                     vehicleLabel.setName("L: " + serialNum);
                     vehiclePanel.add(vehicleLabel);
@@ -252,7 +250,7 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
         int maxPassengers = Integer.parseInt(JOptionPane.showInputDialog(this, "Max Passenger:"));
         int maxSpeed = Integer.parseInt(JOptionPane.showInputDialog(this, "Max Speed:"));
         String countryFlag = JOptionPane.showInputDialog(this, "Country Flag:");
-        byte[] image = getBytes();
+        ImageIcon image = getImageFromUser();
         return new CruiseShip(model, maxPassengers, maxSpeed, countryFlag, image);
     }
 
@@ -261,18 +259,18 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
         int maxPassengers = Integer.parseInt(JOptionPane.showInputDialog(this, "Max Passenger:"));
         int maxSpeed = Integer.parseInt(JOptionPane.showInputDialog(this, "Max Speed:"));
         String roadType = JOptionPane.showInputDialog(this, "Road Type:");
-        byte[] img = getBytes();
+        ImageIcon img = getImageFromUser();
         return new Bicycle(model, maxPassengers, maxSpeed, roadType, img);
     }
 
     private Vehicle createGameGlider() {
-        byte[] img = getBytes();
+        ImageIcon img = getImageFromUser();
         return new GameGlider(img);
     }
 
     private Vehicle createSpyGlider() {
         String powerSource = JOptionPane.showInputDialog(this, "Power Source:");
-        byte[] img = getBytes();
+        ImageIcon img = getImageFromUser();
         return new SpyGlider(powerSource, img);
     }
 
@@ -287,7 +285,7 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
         String countryFlag = JOptionPane.showInputDialog(this, "Country Flag:");
         int averageFuelConsumption = Integer.parseInt(JOptionPane.showInputDialog(this, "Average Fuel Consumption:"));
         int averageEngineLife = Integer.parseInt(JOptionPane.showInputDialog(this, "Average Engine Life:"));
-        byte[] image = getBytes();
+        ImageIcon image = getImageFromUser();
         return new Amphibious(model, maxPassengers, maxSpeed, wheels, windDirection, countryFlag,
                 averageFuelConsumption, averageEngineLife, image);
     }
@@ -298,8 +296,7 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
         int maxSpeed = Integer.parseInt(JOptionPane.showInputDialog(this, "Max Speed:"));
         // Create the wind direction panel and add the radio buttons
         boolean windDirection = isWindDirectionRadio();
-
-        byte[] img = getBytes();
+        ImageIcon img = getImageFromUser();
         return new Frigate(model, maxPassenger, maxSpeed, windDirection, img);
     }
 
@@ -308,7 +305,7 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
         int maxSpeed = Integer.parseInt(JOptionPane.showInputDialog(this, "Max Speed:"));
         int fuelConsumption = Integer.parseInt(JOptionPane.showInputDialog(this, "Fuel Consumption:"));
         int engineLife = Integer.parseInt(JOptionPane.showInputDialog(this, "Engine Life"));
-        byte[] img = getBytes();
+        ImageIcon img = getImageFromUser();
         return new Jeep(model, maxSpeed, fuelConsumption, engineLife, img);
     }
 
@@ -328,7 +325,7 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
         return withWindButton.isSelected();
     }
 
-    private byte[] getBytes() {
+    private ImageIcon getImageFromUser() {
         JFileChooser fileChooser = new JFileChooser();
         JOptionPane.showMessageDialog(this, "Select an image file", "Select Image", JOptionPane.INFORMATION_MESSAGE);
         int result = fileChooser.showOpenDialog(this);
@@ -341,9 +338,10 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
                 e.printStackTrace();
             }
         }
-        return img;
+        ImageIcon imageIcon = new ImageIcon(img);
+        imageIcon.setImage(imageIcon.getImage().getScaledInstance(175, 160, Image.SCALE_DEFAULT));
+        return imageIcon;
     }
-
     private Vehicle[] removeVehicle(Vehicle[] agency, int index) {
         Vehicle[] temp = new Vehicle[agency.length - 1];
         int j = 0;

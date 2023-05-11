@@ -1,5 +1,6 @@
 package vehicle;
 
+import javax.swing.*;
 import java.util.Objects;
 /**
  * Represents a type of vehicle that is designed for sea transportation.
@@ -21,7 +22,7 @@ public class CruiseShip extends Vehicle implements ISeaTransportation,Motorized,
      * @param countryFlag a String representing the country flag of the cruise ship.
      * @param image a byte array representing the image of the cruise ship.
      */
-    public CruiseShip(String model, int maxPassengers, int maxSpeed, String countryFlag, byte[] image){
+    public CruiseShip(String model, int maxPassengers, int maxSpeed, String countryFlag, ImageIcon image){
         super(model, maxPassengers, maxSpeed, image);
         this.countryFlag = countryFlag;
         this.withWindDirection = true;

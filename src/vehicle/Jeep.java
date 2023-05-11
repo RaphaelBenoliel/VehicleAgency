@@ -1,5 +1,6 @@
 package vehicle;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -18,7 +19,7 @@ public class Jeep extends Vehicle implements ILandTransportation,Motorized,Comme
      * @param fuelConsumption an integer representing the average fuel consumption in liters per 100 kilometers.
      * @param engineLife an integer representing the average engine life in years.
      */
-    public Jeep(String model, int maxSpeed, int fuelConsumption, int engineLife, byte[] image) {
+    public Jeep(String model, int maxSpeed, int fuelConsumption, int engineLife, ImageIcon image) {
         super(model, 5, maxSpeed, image);
         setWheels(4);
         setRoadType("off-road");

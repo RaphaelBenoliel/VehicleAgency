@@ -1,5 +1,6 @@
 package vehicle;
 
+import javax.swing.*;
 import java.util.Objects;
 
 /**
@@ -14,7 +15,7 @@ public class SpyGlider extends Vehicle implements IAirTransportation,noMotorized
      * and energy score. all data members is by default.
      * @param PowerSource the source of power of the SpyGlider
      */
-    public SpyGlider(String PowerSource, byte[] image)
+    public SpyGlider(String PowerSource, ImageIcon image)
     {
         super("privileged", 1, 50, image);
         this.useInfo = "military";

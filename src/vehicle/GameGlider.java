@@ -1,5 +1,6 @@
 package vehicle;
 
+import javax.swing.*;
 import java.util.Objects;
 
 /**
@@ -14,7 +15,7 @@ public class GameGlider extends Vehicle implements IAirTransportation, noMotoriz
      * Constructs a GameGlider object with the given model, maximum number of passengers, maximum speed,
      * and energy score. all data members is by default.
      */
-    public GameGlider(byte[] image ) {
+    public GameGlider(ImageIcon image ) {
         super("Toy", 0, 10, image);
         setUseInfo("civilian");
         setPowerSource("manually");

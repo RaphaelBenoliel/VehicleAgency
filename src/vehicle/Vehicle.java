@@ -1,5 +1,6 @@
 package vehicle;
 
+import javax.swing.*;
 import java.util.Objects;
 /**
  * The Vehicle class represents a generic vehicle.
@@ -9,14 +10,14 @@ public abstract class Vehicle {
     protected int distanceTraveled;
     protected int maxPassengers;
     protected int maxSpeed;
-    protected byte[] image;
+    protected ImageIcon image;
     /**
      * Constructs a new Vehicle with the given model, maximum number of passengers, and maximum speed.
      * @param model the model of the vehicle
      * @param maxPassengers the maximum number of passengers the vehicle can carry
      * @param maxSpeed the maximum speed of the vehicle
      */
-    public Vehicle(String model, int maxPassengers, int maxSpeed, byte[] image) {
+    public Vehicle(String model, int maxPassengers, int maxSpeed, ImageIcon image) {
         this.model = model;
         this.distanceTraveled = 0;
         this.maxPassengers = maxPassengers;
@@ -76,11 +77,11 @@ public abstract class Vehicle {
         if (maxSpeed != vehicle.maxSpeed) return false;
         return Objects.equals(model, vehicle.model);
     }
-    public void setImage(byte[] image) {
+    public void setImage(ImageIcon image) {
         this.image = image;
     }
 
-    public byte[] getImage() {
+    public ImageIcon getImage() {
         return image;
     }
 }// End of Vehicle class

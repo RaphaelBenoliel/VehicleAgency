@@ -1,5 +1,6 @@
 package vehicle;
 
+import javax.swing.*;
 import java.util.Objects;
 /**
  * The Bicycle class represents a bicycle.
@@ -20,7 +21,7 @@ public class Bicycle extends Vehicle implements ILandTransportation, noMotorized
      * @param roadType a String representing the type of road the bicycle can move on.
      * @param image a byte array representing the image of the bicycle.
      */
-    public Bicycle(String model, int maxPassengers, int maxSpeed, String roadType, byte[] image){
+    public Bicycle(String model, int maxPassengers, int maxSpeed, String roadType, ImageIcon image){
         super(model, maxPassengers, maxSpeed, image);
         this.wheels = 2;
         this.roadType = roadType;
