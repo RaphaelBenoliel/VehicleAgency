@@ -12,6 +12,11 @@ public class BuyingDialog extends JDialog {
 
     private int result = -1;
 
+    /**
+     * Constructor for the BuyingDialog class.
+     * @param window The parent window.
+     * @param panel The panel containing the vehicles.
+     */
     public BuyingDialog(Frame window, JPanel panel) {
         super(window, "Buying a vehicle", true);
         add(panel);

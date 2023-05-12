@@ -11,6 +11,10 @@ import java.awt.event.MouseListener;
 public class FlagDialog extends JDialog {
     private int result = -1;
 
+    /**
+     * Constructs a BuyingDialog object with the given window and panel.
+     * @param window the window of the parent frame (VehicleAgencyGUI).
+     */
     public FlagDialog(JFrame window) {
         super(window, "Changing all vessels flags", true);
 

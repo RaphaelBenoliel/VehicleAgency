@@ -294,8 +294,12 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
         int maxPassengers = Integer.parseInt(JOptionPane.showInputDialog(this, "Max Passenger:"));
         int maxSpeed = Integer.parseInt(JOptionPane.showInputDialog(this, "Max Speed:"));
         String countryFlag = JOptionPane.showInputDialog(this, "Country Flag:");
-        ImageIcon image = getImageFromUser();
-        return new CruiseShip(model, maxPassengers, maxSpeed, countryFlag, image);
+        ImageIcon img = getImageFromUser();
+        if (img == null) {
+            img = new ImageIcon("src/ImgSource/cruise.png");
+            img = new ImageIcon(img.getImage().getScaledInstance(180, 170, Image.SCALE_DEFAULT));
+        }
+        return new CruiseShip(model, maxPassengers, maxSpeed, countryFlag, img);
     }
 
     private Vehicle createBicycle() {
@@ -304,17 +308,30 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
         int maxSpeed = Integer.parseInt(JOptionPane.showInputDialog(this, "Max Speed:"));
         String roadType = JOptionPane.showInputDialog(this, "Road Type:");
         ImageIcon img = getImageFromUser();
+        if (img == null) {
+            img = new ImageIcon("src/ImgSource/bicycle1.png");
+            img = new ImageIcon(img.getImage().getScaledInstance(180, 170, Image.SCALE_DEFAULT));
+
+        }
         return new Bicycle(model, maxPassengers, maxSpeed, roadType, img);
     }
 
     private Vehicle createGameGlider() {
         ImageIcon img = getImageFromUser();
+        if (img == null) {
+            img = new ImageIcon("src/ImgSource/gameGlider.png");
+            img = new ImageIcon(img.getImage().getScaledInstance(180, 170, Image.SCALE_DEFAULT));
+        }
         return new GameGlider(img);
     }
 
     private Vehicle createSpyGlider() {
         String powerSource = JOptionPane.showInputDialog(this, "Power Source:");
         ImageIcon img = getImageFromUser();
+        if (img == null) {
+            img = new ImageIcon("src/ImgSource/spyGlider.png");
+            img = new ImageIcon(img.getImage().getScaledInstance(180, 170, Image.SCALE_DEFAULT));
+        }
         return new SpyGlider(powerSource, img);
     }
 
@@ -325,13 +342,16 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
         int wheels = Integer.parseInt(JOptionPane.showInputDialog(this, "Wheels:"));
         // Create the wind direction panel and add the radio buttons
         boolean windDirection = isWindDirectionRadio();
-
         String countryFlag = JOptionPane.showInputDialog(this, "Country Flag:");
         int averageFuelConsumption = Integer.parseInt(JOptionPane.showInputDialog(this, "Average Fuel Consumption:"));
         int averageEngineLife = Integer.parseInt(JOptionPane.showInputDialog(this, "Average Engine Life:"));
-        ImageIcon image = getImageFromUser();
+        ImageIcon img = getImageFromUser();
+        if (img == null) {
+            img = new ImageIcon("src/ImgSource/amphibious.png");
+            img = new ImageIcon(img.getImage().getScaledInstance(180, 170, Image.SCALE_DEFAULT));
+        }
         return new Amphibious(model, maxPassengers, maxSpeed, wheels, windDirection, countryFlag,
-                averageFuelConsumption, averageEngineLife, image);
+                averageFuelConsumption, averageEngineLife, img);
     }
 
     private Vehicle createFrigate() {
@@ -341,6 +361,10 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
         // Create the wind direction panel and add the radio buttons
         boolean windDirection = isWindDirectionRadio();
         ImageIcon img = getImageFromUser();
+        if (img == null) {
+            img = new ImageIcon("src/ImgSource/frigate.png");
+            img = new ImageIcon(img.getImage().getScaledInstance(180, 170, Image.SCALE_DEFAULT));
+        }
         return new Frigate(model, maxPassenger, maxSpeed, windDirection, img);
     }
 
@@ -361,6 +385,10 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
             }
         }
         ImageIcon img = getImageFromUser();
+        if (img == null) {
+            img = new ImageIcon("src/ImgSource/jeep3.png");
+            img = new ImageIcon(img.getImage().getScaledInstance(180, 170, Image.SCALE_DEFAULT));
+        }
         return new Jeep(model, maxSpeed, fuelConsumption, engineLife, img);
     }
 
@@ -389,27 +417,34 @@ public class VehicleAgencyGUI extends JFrame implements ActionListener,MouseList
      * @return an ImageIcon with the image selected by the user resized to 175x160
      */
     private ImageIcon getImageFromUser() {
+        ImageIcon imageIcon = null;
         JFileChooser fileChooser = new JFileChooser();
-        JOptionPane.showMessageDialog(this, "Select an image file", "Select Image", JOptionPane.INFORMATION_MESSAGE);
-        int result = fileChooser.showOpenDialog(this);
-        byte[] img = null;
-        do {
-            if (result == JFileChooser.CANCEL_OPTION) {
-                JOptionPane.showMessageDialog(this,
-                        "You must select an image file", "Select Image", JOptionPane.ERROR_MESSAGE);
-                result = fileChooser.showOpenDialog(this);
+        String[] button = {"Set by default", "Upload an image"};
+        int option = JOptionPane.showOptionDialog(this, "Select Your option please",
+                "Set the image for the vehicle", JOptionPane.DEFAULT_OPTION,JOptionPane.QUESTION_MESSAGE,
+                null,button, button[0]);
+        if (option == 1 ) {
+            int result = fileChooser.showOpenDialog(this);
+            do {
+                if (result == JFileChooser.CANCEL_OPTION) {
+                    JOptionPane.showMessageDialog(this,
+                            "You must select an image file", "Select Image", JOptionPane.ERROR_MESSAGE);
+                    result = fileChooser.showOpenDialog(this);
+                }
+            } while (result == JFileChooser.CANCEL_OPTION);
+            if (result == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = fileChooser.getSelectedFile();
+                try {
+                    imageIcon = new ImageIcon(Files.readAllBytes(selectedFile.toPath()));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
-        } while (result == JFileChooser.CANCEL_OPTION);
-        if (result == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();
-            try {
-                img = Files.readAllBytes(selectedFile.toPath());
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (imageIcon != null) {
+                imageIcon = new ImageIcon(imageIcon.getImage().getScaledInstance(180, 170, Image.SCALE_DEFAULT));
             }
         }
-        ImageIcon imageIcon = new ImageIcon(img);
-        imageIcon.setImage(imageIcon.getImage().getScaledInstance(175, 160, Image.SCALE_DEFAULT));
+        if(imageIcon == null) JOptionPane.showMessageDialog(this, "The image will be setting by default");
         return imageIcon;
     }
 

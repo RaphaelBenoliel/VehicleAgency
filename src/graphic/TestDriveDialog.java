@@ -14,6 +14,11 @@ public class TestDriveDialog extends JDialog {
     private int result = -1;
     private int index = -1;
 
+    /**
+     * Constructor for the TestDriveDialog class.
+     * @param window The parent window.
+     * @param panel The panel containing the vehicles.
+     */
     public TestDriveDialog(Frame window, JPanel panel) {
         super(window, "Test Drive a vehicle", true);
         add(panel);
