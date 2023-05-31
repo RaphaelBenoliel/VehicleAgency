@@ -2,6 +2,9 @@ package vehicle;
 
 import javax.swing.*;
 import java.util.Objects;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 /**
  * The Vehicle class represents a generic vehicle.
  */
@@ -11,6 +14,17 @@ public abstract class Vehicle {
     protected int maxPassengers;
     protected int maxSpeed;
     protected ImageIcon image;
+    private boolean inTest = false;
+
+    private boolean inBuy = false;
+
+    private static Object sharedLock = new Object(); // Verrou partagé pour la synchronisation des threads
+
+    private static Object sharedLockB = new Object(); // Verrou partagé pour la synchronisation des threads
+
+    private Lock lock = new ReentrantLock(); // Verrou pour la synchronisation des threads
+
+    private Lock lockB = new ReentrantLock();
     /**
      * Constructs a new Vehicle with the given model, maximum number of passengers, and maximum speed.
      * @param model the model of the vehicle
@@ -49,7 +63,11 @@ public abstract class Vehicle {
     public void setMaxPassengers(int maxPassengers) { this.maxPassengers = maxPassengers; }
 
     public void setMaxSpeed(int maxSpeed) { this.maxSpeed = maxSpeed; }
+    public static Object getSharedLock() {
+        return sharedLock;
+    }
 
+    public static Object getSharedLockB() {return sharedLock;}
     /**
      * Returns a string representation of the vehicle, including its model, distance traveled, maximum speed,
      * and maximum number of passengers.
@@ -83,5 +101,63 @@ public abstract class Vehicle {
 
     public ImageIcon getImage() {
         return image;
+    }
+    public synchronized void startTest(double distance) throws InterruptedException {
+
+        synchronized (sharedLock) {
+
+            if (isInTest()) {
+                JOptionPane.showMessageDialog(null, "This vehicle is already being tested.");
+                return;
+            }
+
+            inTest = true;
+            // Effectuer les actions nécessaires pour le test
+
+            // Faire dormir le thread pendant la durée du test
+            long sleepTime = (long) (distance * 100);
+            Thread.sleep(sleepTime);
+
+            // Effectuer d'autres actions après le test
+            synchronized (sharedLock) {
+                inTest = false;
+            }
+        }
+    }
+    public synchronized boolean isInTest() {
+        return inTest;
+    }
+
+    public Lock getLock() {
+        return lock;
+    }
+
+
+
+    public synchronized void starBuy() throws InterruptedException {
+
+        synchronized (sharedLockB) {
+
+            if (isInBuy()) {
+                JOptionPane.showMessageDialog(null, "This vehicle is already being buy process.");
+                return;
+            }
+
+            inBuy = true;
+
+
+            // Effectuer d'autres actions après le test
+            synchronized (sharedLock) {
+                inBuy = false;
+            }
+        }
+    }
+
+    public synchronized boolean isInBuy() {
+        return inBuy;
+    }
+
+    public Lock getLockB() {
+        return lockB;
     }
 }// End of Vehicle class
